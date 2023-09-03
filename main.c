@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/03 00:52:22 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/03 11:08:14 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,109 @@ int	main(int ac, char **av)
 		free(data->mlx);
 		return (1);
 	}
-	put_image(data);
-	put_image_to_letter(data);
-	mlx_loop_hook (data->mlx, &put_image_to_letter, data);
+	// put_image(data);
+	// put_image_to_letter(data);
+	int	i = 0;
+	int	j;
+	int	nb_i = 80;
+	int	nb_j = 80;
+	int	start_j = 0;
+	int	x = 0;
+	int	y = 0;
+	int flag = 0;
+
+	while (data->map[x])
+	{
+		y = 0;
+		i = 0;
+		nb_i = 80;
+		while (data->map[x][y])
+		{
+			if (data->map[x][y] == '1')
+				flag = 1;
+			while (i < nb_i)
+			{
+				j = start_j + 1;
+				while (j < nb_j)
+				{
+					if (flag == 1)
+						mlx_pixel_put(data->mlx, data->win, i, j, 0xFFFFFFF);
+					j++;
+				}
+				i++;
+			}
+			flag = 0;
+			y++;
+			i++;
+			nb_i += 80;
+		}
+		nb_j += 80;
+		start_j += 80;
+		x++;
+	}
+	while (j < 1000)
+	{
+		i = 0;
+		nb_i = 80;
+		while (i < 1000)
+		{
+			while (i < nb_i)
+			{
+				j = start_j + 1;
+				while (j < nb_j)
+				{
+					if (data->map[x][y] == 1)
+						mlx_pixel_put(data->mlx, data->win, i, j, 0xFFFFFFF);
+					j++;
+				}
+				i++;
+			}
+			x++;
+			y++;
+			i++;
+			nb_i += 80;
+			while (i < nb_i)
+			{
+				j = start_j + 1; 
+				while (j < nb_j)
+				{
+					if (data->map[x][y] == 1)
+						mlx_pixel_put(data->mlx, data->win, i, j, 0xFFFFFFF);
+					j++;
+				}
+				i++;
+			}
+			x++;
+			y++;
+		}
+		nb_j += 80;
+		start_j += 80;
+	}
+	x = 1000 / 2;
+    y = 1000 / 2;
+    int radius = 7;
+	int start_x = x - radius;
+	int	end_x = x + radius;
+	int start_y = y - radius;
+	int	end_y = y + radius;
+
+	printf("x = %d\ty = %d\n", start_x - x, start_y - y);
+	while (start_x <= end_x)
+	{
+		start_y = y - radius;
+		while (start_y <= end_y)
+		{
+			if (((start_x - x) * (start_x - x)) + ((start_y - y) * (start_y - y)) <= (radius * radius))
+			mlx_pixel_put(data->mlx, data->win, start_x, start_y, 0xFF0000);
+			start_y++;
+		}
+		start_x++;
+	}
+	while (y > 450)
+	{
+		mlx_pixel_put(data->mlx, data->win, x, y, 0xFF0000);
+			y--;
+	}
+	mlx_loop_hook (data->mlx, &mlx_pixel_put, data);
 	mlx_loop(data->mlx);
 }

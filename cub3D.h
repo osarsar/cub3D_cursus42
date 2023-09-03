@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/03 00:53:21 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/03 11:03:36 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include "get_next_line.h"
 # include <mlx.h>
-//#include <math.h>
+#include <math.h>
 
 typedef struct s_ply
 {
@@ -45,4 +45,6 @@ static int	word_size(const char *s, char c);
 static int	words_numb(const char *s, char c);
 void		creat_map(t_ply *data);
 void		init_data(t_ply *data, int ac, char **av);
+void		put_image(t_ply *data);
+int			put_image_to_letter(t_ply *data);
 #endif
