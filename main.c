@@ -6,13 +6,13 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/04 08:07:32 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/04 10:31:10 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_data(t_ply *data, int ac, char **av)
+void	init_data(t_data *data, int ac, char **av)
 {
 	data->ac = ac;
 	data->av = av;
@@ -23,8 +23,7 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->o_y = 500;
 	data->nb_x = 80;
 	data->nb_y = 80;
-	data->start_y = 0;
-	data->start_x = 0;
+	data->map = NULL;
 	data->start_j = 0;
 	data->flag = 0;
 	data->radius = 7;
@@ -35,7 +34,7 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->nb_rays = 320;
 }
 
-void	collect_map(t_ply *data)
+void	collect_map(t_data *data)
 {
 	char	*line;
 	char	*join_lines;
@@ -58,13 +57,14 @@ double	deg_to_rad(double deg)
 	return (deg * (M_PI / 180.0));
 }
 
-void	creat_map_line(t_ply *data)
+void	creat_map_line(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
+	data->y = 0;
 	while (data->map[data->x][data->y])
 	{
 		if (data->map[data->x][data->y] == '1')
@@ -87,20 +87,7 @@ void	creat_map_line(t_ply *data)
 	}
 }
 
-void	creat_map(t_ply *data)
-{
-	while (data->map[data->x])
-	{
-		data->y = 0;
-		data->nb_x = 80;
-		creat_map_line(data);
-		data->nb_y += 80;
-		data->start_j += 80;
-		data->x++;
-	}
-}
-
-void	put_player(t_ply *data)
+void	put_player(t_data *data)
 {
 	data->x = data->start_x;
 	while (data->x <= data->end_x)
@@ -111,14 +98,16 @@ void	put_player(t_ply *data)
 			if (((data->x - data->o_x) * (data->x - data->o_x))
 				+ ((data->y - data->o_y) * (data->y - data->o_y))
 				<= (data->radius * data->radius))
-				mlx_pixel_put(data->mlx, data->win, data->x, data->y, 0xFF0000);
+					mlx_pixel_put(data->mlx, data->win, data->x, data->y, 0xFF0000);
 			data->y++;
+			printf("intern\n");
 		}
+			printf("extern\n");
 		data->x++;
 	}
 }
 
-void	push_rays(t_ply *data, double rad)
+void	push_rays(t_data *data, double rad)
 {
 	int	i;
 	int	x;
@@ -138,7 +127,7 @@ void	push_rays(t_ply *data, double rad)
 	}
 }
 
-void	fov_player(t_ply *data)
+void	fov_player(t_data *data)
 {
 	double	angle;
 	double	rad;
@@ -157,16 +146,52 @@ void	fov_player(t_ply *data)
 	}
 }
 
+int	creat_map(t_data *data)
+{
+	data->x = 0;
+	data->nb_y = 80;
+	data->start_j = 0;
+	while (data->map[data->x])
+	{
+		data->y = 0;
+		data->nb_x = 80;
+		creat_map_line(data);
+		data->nb_y += 80;
+		data->start_j += 80;
+		data->x++;
+	}
+	put_player(data);
+	fov_player(data);
+	return (0);
+}
+
+int	move_player(int key, t_data *data)
+{
+	if (key == 53)
+		exit(1);
+	if (key == 13)
+	{
+		data->o_x += 10;
+		printf("data->o_x = %d\n", data->o_x);
+		data->o_y += 10;
+		printf("data->o_y = %d\n", data->o_y);
+		mlx_clear_window(data->mlx, data->win);
+		return(0);
+	}
+
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
-	t_ply	*data;
+	t_data	*data;
 	char	*line;
 	char	*join_lines;
 	int		fd;
 
 	(void)ac;
 	(void)av;
-	data = malloc(sizeof(t_ply));
+	data = malloc(sizeof(t_data));
 	if (!data)
 		return (1);
 	init_data(data, ac, av);
@@ -180,10 +205,8 @@ int	main(int ac, char **av)
 		free(data->mlx);
 		return (1);
 	}
-	creat_map(data);
-	put_player(data);
-	fov_player(data);
-	mlx_loop_hook (data->mlx, &mlx_pixel_put, data);
-	//mlx_hook (data->win, 2, 0, &move_player, data);
+	mlx_loop_hook (data->mlx, &creat_map, data);
+	mlx_hook (data->win, 2, 0, &move_player, data);
 	mlx_loop(data->mlx);
+
 }
