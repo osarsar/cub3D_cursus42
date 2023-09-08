@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/04 10:18:29 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/07 22:19:37 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 # include <mlx.h>
 # include <math.h>
 
-// typedef struct s_ply
-// {
-// 	int x;
-	
-// }t_ply;
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
-typedef struct s_data
+typedef struct s_ply
 {
 	char	**map;
 	char	**av;
@@ -48,18 +50,21 @@ typedef struct s_data
 	int		flag;
 	int		radius;
 	int		nb_rays;
+	t_data	*data;
 	// t_ply	player;
 
-}t_data;
+}t_ply;
 
+
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 char		**ft_split(char const *s, char c);
 static void	*free_f(char **str, int i);
 static char	*fill_str(char *lil_str, const char *s, char c);
 static int	word_size(const char *s, char c);
 static int	words_numb(const char *s, char c);
-void		collect_map(t_data *data);
-void		init_data(t_data *data, int ac, char **av);
-void		put_image(t_data *data);
-int			put_image_to_letter(t_data *data);
-int	creat_map(t_data *data);
+void		collect_map(t_ply *data);
+void		init_data(t_ply *data, int ac, char **av);
+void		put_image(t_ply *data);
+int			put_image_to_letter(t_ply *data);
+int	creat_map(t_ply *data);
 #endif

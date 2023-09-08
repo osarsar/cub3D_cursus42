@@ -6,13 +6,21 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/04 10:31:10 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/08 04:30:32 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	init_data(t_data *data, int ac, char **av)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	init_data(t_ply *data, int ac, char **av)
 {
 	data->ac = ac;
 	data->av = av;
@@ -34,7 +42,7 @@ void	init_data(t_data *data, int ac, char **av)
 	data->nb_rays = 320;
 }
 
-void	collect_map(t_data *data)
+void	collect_map(t_ply *data)
 {
 	char	*line;
 	char	*join_lines;
@@ -57,7 +65,7 @@ double	deg_to_rad(double deg)
 	return (deg * (M_PI / 180.0));
 }
 
-void	creat_map_line(t_data *data)
+void	creat_map_line(t_ply *data)
 {
 	int	i;
 	int	j;
@@ -75,7 +83,9 @@ void	creat_map_line(t_data *data)
 			while (j < data->nb_y)
 			{
 				if (data->flag == 1)
-					mlx_pixel_put(data->mlx, data->win, i, j, 0xFFFFFFF);
+				{
+					my_mlx_pixel_put(data->data, i, j, 0x00FFFFFF);
+				}
 				j++;
 			}
 			i++;
@@ -87,7 +97,7 @@ void	creat_map_line(t_data *data)
 	}
 }
 
-void	put_player(t_data *data)
+void	put_player(t_ply *data)
 {
 	data->x = data->start_x;
 	while (data->x <= data->end_x)
@@ -98,16 +108,14 @@ void	put_player(t_data *data)
 			if (((data->x - data->o_x) * (data->x - data->o_x))
 				+ ((data->y - data->o_y) * (data->y - data->o_y))
 				<= (data->radius * data->radius))
-					mlx_pixel_put(data->mlx, data->win, data->x, data->y, 0xFF0000);
+					my_mlx_pixel_put(data->data, data->x, data->y, 0x00FF0000);
 			data->y++;
-			printf("intern\n");
 		}
-			printf("extern\n");
 		data->x++;
 	}
 }
 
-void	push_rays(t_data *data, double rad)
+void	push_rays(t_ply *data, double rad)
 {
 	int	i;
 	int	x;
@@ -122,12 +130,12 @@ void	push_rays(t_data *data, double rad)
 	{
 		ox = x - (i * cos(rad));
 		oy = y - (i * sin(rad));
-		mlx_pixel_put(data->mlx, data->win, ox, oy, 0xFF0000);
+		my_mlx_pixel_put(data->data, ox, oy, 0x00FF0000);
 		i++;
 	}
 }
 
-void	fov_player(t_data *data)
+void	fov_player(t_ply *data)
 {
 	double	angle;
 	double	rad;
@@ -146,7 +154,7 @@ void	fov_player(t_data *data)
 	}
 }
 
-int	creat_map(t_data *data)
+int	creat_map(t_ply *data)
 {
 	data->x = 0;
 	data->nb_y = 80;
@@ -165,48 +173,75 @@ int	creat_map(t_data *data)
 	return (0);
 }
 
-int	move_player(int key, t_data *data)
+int	move_player(int key, t_ply *data)
 {
 	if (key == 53)
 		exit(1);
 	if (key == 13)
 	{
 		data->o_x += 10;
-		printf("data->o_x = %d\n", data->o_x);
 		data->o_y += 10;
-		printf("data->o_y = %d\n", data->o_y);
 		mlx_clear_window(data->mlx, data->win);
 		return(0);
 	}
-
 	return (0);
 }
 
+// int	main(int ac, char **av)
+// {
+// 	t_ply	*data;
+// 	char	*line;
+// 	char	*join_lines;
+// 	int		fd;
+
+// 	(void)ac;
+// 	(void)av;
+// 	data = malloc(sizeof(t_ply));
+// 	if (!data)
+// 		return (1);
+// 	init_data(data, ac, av);
+// 	collect_map(data);
+// 	data->mlx = mlx_init();
+// 	if (!data->mlx)
+// 		return (1);
+// 	data->win = mlx_new_window(data->mlx, 1000, 1000, "game_3D");
+// 	if (!data->win)
+// 	{
+// 		free(data->mlx);
+// 		return (1);
+// 	}
+// 	data->data->img = mlx_new_image(data->mlx, 1000, 1000);
+// 	data->data->addr = mlx_get_data_addr(data->data->img, &data->data->bits_per_pixel, &data->data->line_length, &data->data->endian);
+// 	mlx_put_image_to_window(data->mlx, data->win, data->data->img, 0, 0);
+// 	mlx_loop_hook (data->mlx, &creat_map, data);
+// 	mlx_hook (data->win, 2, 0, &move_player, data);
+// 	mlx_loop(data->mlx);
+// }
+
 int	main(int ac, char **av)
 {
-	t_data	*data;
-	char	*line;
-	char	*join_lines;
-	int		fd;
 
-	(void)ac;
-	(void)av;
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (1);
-	init_data(data, ac, av);
-	collect_map(data);
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		return (1);
-	data->win = mlx_new_window(data->mlx, 1000, 1000, "game_3D");
-	if (!data->win)
-	{
-		free(data->mlx);
-		return (1);
-	}
-	mlx_loop_hook (data->mlx, &creat_map, data);
-	mlx_hook (data->win, 2, 0, &move_player, data);
-	mlx_loop(data->mlx);
 
+		t_ply	*data;
+
+		data = malloc(sizeof(t_ply));
+		if (!data)
+			return (0);
+		data->data = malloc(sizeof(t_data));
+		if (!data->data)
+		{
+			free(data);
+			return (0);
+		}
+		init_data(data, ac, av);
+		collect_map(data);	
+		data->mlx = mlx_init();
+		data->win = mlx_new_window(data->mlx, 1040, 1040, "Hello world!");
+		data->data->img = mlx_new_image(data->mlx, 3000, 3000);
+		data->data->addr = mlx_get_data_addr(data->data->img, &data->data->bits_per_pixel, &data->data->line_length, &data->data->endian);
+		creat_map(data);
+		mlx_put_image_to_window(data->mlx, data->win, data->data->img, 0, 0);
+		// 	mlx_loop_hook (data->mlx, &creat_map, data);
+	//mlx_hook (data->win, 2, 0, &move_player, data);
+		mlx_loop(data->mlx);
 }
