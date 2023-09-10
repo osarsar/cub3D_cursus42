@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/07 22:19:37 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/08 22:36:33 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ typedef struct s_ply
 	int		flag;
 	int		radius;
 	int		nb_rays;
+	int		speed;
 	t_data	*data;
-	// t_ply	player;
-
 }t_ply;
 
 
