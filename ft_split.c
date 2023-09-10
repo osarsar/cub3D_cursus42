@@ -6,13 +6,13 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 09:31:43 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/03 00:02:32 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/10 08:32:26 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int	words_numb(const char *s, char c)
+int	words_numb(const char *s, char c)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ static int	words_numb(const char *s, char c)
 	return (i);
 }
 
-static int	word_size(const char *s, char c)
+int	word_size(const char *s, char c)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static int	word_size(const char *s, char c)
 	return (i);
 }
 
-static char	*fill_str(char *lil_str, const char *s, char c)
+char	*fill_str(char *lil_str, const char *s, char c)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ static char	*fill_str(char *lil_str, const char *s, char c)
 	return (lil_str);
 }
 
-static void	*free_f(char **str, int i)
+void	*free_f(char **str, int i)
 {
 	while (i >= 0)
 	{
