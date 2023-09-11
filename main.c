@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/10 08:19:08 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/11 05:40:21 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,14 @@ int	main(int ac, char **av)
 
 	data = malloc(sizeof(t_ply));
 	if (!data)
-		return (0);
+		affiche_er(2);
 	data->data = malloc(sizeof(t_data));
 	if (!data->data)
 	{
 		free(data);
-		return (0);
+		affiche_er(2);
 	}
-	init_data(data, ac, av);
-	collect_map(data);
+	pars(data, ac, av);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 1040, 1040, "Hello world!");
 	data->data->img = mlx_new_image(data->mlx, 1050, 1050);

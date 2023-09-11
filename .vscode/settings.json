@@ -6,6 +6,8 @@
         "string_view": "c",
         "vector": "c",
         "math.h": "c",
-        "mlx.h": "c"
+        "mlx.h": "c",
+        "get_next_line.h": "c",
+        "libft.h": "c"
     }
 }

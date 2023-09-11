@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/10 08:35:05 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/11 06:28:57 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,16 @@ int			creat_map(t_ply *data);
 void		put_player(t_ply *data);
 void		fov_player(t_ply *data);
 double		deg_to_rad(double deg);
+//-----------------------------------------------------> tols1.c
+void			pars(t_ply	*data, int ac, char **av);
+void		affiche_er(int a);
+void		get_map(int fd, t_ply *data);
+void		check_line_extrem(char *linee);
+void		check_line1(char *line1);
+void		check_line_fin(char *line1);
+void		check_char_in_map(char *str);
+
+//-----------------------------------------------------> libft.c
+char		*ft_strtrim(char *s1, char *set);
+
 #endif
