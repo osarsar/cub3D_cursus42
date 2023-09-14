@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/14 04:59:17 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/14 05:28:46 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void	fov_player(t_ply *data)
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
 		data->h_dx = (data->h_dy / tan(rad)) * -1;
 		data->h_dy = -80;
-			printf("rad = %s\n", view);
 	}
 	else if (!ft_strcmp(view, "up_right"))
 	{
@@ -126,7 +125,6 @@ void	fov_player(t_ply *data)
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
 		data->h_dx = (data->h_dy / tan(rad)) * -1;
 		data->h_dy = -80;
-			printf("rad = %s\n", view);
 	}
 	else if (!ft_strcmp(view, "down_left"))
 	{
@@ -134,7 +132,6 @@ void	fov_player(t_ply *data)
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
 		data->h_dx = (data->h_dy / tan(rad));
 		data->h_dy = 80;
-			printf("rad = %s\n", view);
 	}
 	else if (!ft_strcmp(view, "down_right"))
 	{
@@ -142,24 +139,19 @@ void	fov_player(t_ply *data)
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
 		data->h_dx = (data->h_dy / tan(rad));
 		data->h_dy = 80;
-			printf("rad = %s\n", view);
 	}
 	data->xstep = data->first_hx;
 	data->ystep = data->first_hy;
-	printf("data->xstep = %f\n", data->xstep);
-	printf("data->ystep = %f\n", data->ystep);
-	int	i = 0;
-	while (i <= 3)
+	// printf("data->map = %c\n", data->map[(int)data->xstep / 80][(int)data->ystep / 80]);
+	while (1)
 	{
 		my_mlx_pixel_put(data->mydata, (int)data->xstep, (int)data->ystep, 0x00FF0000);
+		if (data->map[(int)data->xstep / 80][(int)data->ystep / 80] == '1')
+			break;
 		data->xstep += data->h_dx;
 		data->ystep += data->h_dy;
-		i++;
 	}
 	//push_rays(data, rad);
-	// printf("data->h_dx = %f\n", data->h_dx);
-	// printf("data->h_dy = %f\n", data->h_dy);
-	// printf("data->first_hx = %f\n", data->first_hx);
 	// if (!ft_strcmp(view, "up_right") || !ft_strcmp(view, "up_left"))
 	// 	data->ystep--;
 	
