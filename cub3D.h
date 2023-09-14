@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/11 06:28:57 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/14 04:31:46 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_ply
 	void	*win;
 	int		x;
 	int		y;
-	int		o_x;
-	int		o_y;
+	int		p_x;
+	int		p_y;
 	int		start_x;
 	int		start_y;
 	int		start_j;
@@ -53,7 +53,17 @@ typedef struct s_ply
 	int		speed;
 	int		len_ray;
 	double	angle;
-	t_data	*data;
+	double	first_hx;
+	double	first_hy;
+	double	first_vx;
+	double	first_vy;
+	double	h_dx;
+	double	h_dy;
+	double	v_dx;
+	double	v_dy;
+	double	xstep;
+	double	ystep;
+	t_data	*mydata;
 }t_ply;
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -70,16 +80,8 @@ int			creat_map(t_ply *data);
 void		put_player(t_ply *data);
 void		fov_player(t_ply *data);
 double		deg_to_rad(double deg);
-//-----------------------------------------------------> tols1.c
-void			pars(t_ply	*data, int ac, char **av);
-void		affiche_er(int a);
-void		get_map(int fd, t_ply *data);
-void		check_line_extrem(char *linee);
-void		check_line1(char *line1);
-void		check_line_fin(char *line1);
-void		check_char_in_map(char *str);
-
-//-----------------------------------------------------> libft.c
-char		*ft_strtrim(char *s1, char *set);
+void		first_hori_verti(t_ply *data, double rad);
+char		*check_view(double rad);
+int			ft_strcmp(const char *s1, const char *s2);
 
 #endif

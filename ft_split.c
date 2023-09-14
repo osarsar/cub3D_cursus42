@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 09:31:43 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/10 08:32:26 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/13 06:20:53 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,14 @@ char	**ft_split(char const *s, char c)
 	}
 	*(tab + i) = 0;
 	return (tab);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

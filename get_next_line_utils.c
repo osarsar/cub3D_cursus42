@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 21:06:05 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/11 06:23:51 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/13 00:20:06 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strchr(char *str, int c)
 	{
 		if (str[i] == (char)c)
 			return (str);
-		i++;
+		str++;
 	}
 	return (0);
 }
