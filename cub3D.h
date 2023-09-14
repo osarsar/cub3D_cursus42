@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/14 04:31:46 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/14 09:10:53 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_ply
 	void	*win;
 	int		x;
 	int		y;
-	int		p_x;
-	int		p_y;
+	int		o_x;
+	int		o_y;
 	int		start_x;
 	int		start_y;
 	int		start_j;
@@ -53,17 +53,17 @@ typedef struct s_ply
 	int		speed;
 	int		len_ray;
 	double	angle;
-	double	first_hx;
-	double	first_hy;
-	double	first_vx;
-	double	first_vy;
-	double	h_dx;
-	double	h_dy;
-	double	v_dx;
-	double	v_dy;
-	double	xstep;
-	double	ystep;
-	t_data	*mydata;
+	char	*no_path;
+	char	*so_path;
+	char	*we_path;
+	char	*ea_path;
+	int		f_1;
+	int		f_2;
+	int		f_3;
+	int		c_1;
+	int		c_2;
+	int		c_3;
+	t_data	*data;
 }t_ply;
 
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -80,8 +80,46 @@ int			creat_map(t_ply *data);
 void		put_player(t_ply *data);
 void		fov_player(t_ply *data);
 double		deg_to_rad(double deg);
-void		first_hori_verti(t_ply *data, double rad);
-char		*check_view(double rad);
-int			ft_strcmp(const char *s1, const char *s2);
 
+//-----------------------------------------------------> tols1.c
+void		pars(t_ply	*data, int ac, char **av);
+void		get_map(int fd, t_ply *data);
+void		read_config_f_c(char *line, t_ply *data);
+void		check_number(char **list_color, int check, t_ply *data);
+void		check_comma(char *line);
+
+//-----------------------------------------------------> tols2.c
+void		ft_lstclear_double(char **lstmap);
+void		check_line1(char *line1);
+void		check_line_fin(char *line1);
+void		check_char_in_map(char *str);
+void		check_line_extrem(char *linee);
+
+//-----------------------------------------------------> tols3.c
+void		affiche_er(int a);
+char		*replace_char(char *tmp_line, char old, char new);
+int			max_size_col(char **map);
+char		**map_to_rectangle(char **map);
+char		*rest_to_rect(int max_size, int size);
+
+//-----------------------------------------------------> tols4.c
+int			size_map_line(char **map);
+void		go_to_check(char **map, int i, int j);
+void		like_bfs_algo(char **map);
+void		check_map_close(char **map);
+char		*read_config_path_2(char *path);
+
+//-----------------------------------------------------> tols5.c
+void		read_config_1(char *line, t_ply *data);
+char		*read_config(int fd, t_ply *data);
+void		read_config_path(char *line, t_ply *data);
+
+//-----------------------------------------------------> libft1.c
+char		*ft_strtrim(char *s1, char *set);
+
+//-----------------------------------------------------> libft2.c
+int			ft_strncmp(const char *s1, const char *s2, size_t len);
+int			ft_strcmp(char *s1, char *s2);
+int			ft_atoi(char *str);
+int			ft_atoi_trois(void);
 #endif
