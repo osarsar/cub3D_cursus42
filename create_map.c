@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/13 00:42:49 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/15 23:27:02 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,12 @@ void	creat_map_line(t_ply *data)
 				put_pixel_to_image(data, i, j);
 				j++;
 			}
-			//j --> horizontal
 			i++;
 		}
-		//i ---> vertical
 		data->y++;
 		data->nb_x += 80;
 	}
 }
-
 
 int	creat_map(t_ply *data)
 {

@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 23:17:48 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/15 23:49:52 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char *check_view(double rad)
 
 void	modify_depend_view(t_ply *data, char *view, double rad)
 {
-		if (!ft_strcmp(view, "up_left"))
+	if (!ft_strcmp(view, "up_left"))
 	{
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
 		data->h_dx *= -1;
@@ -98,4 +98,36 @@ void	verti_wall_cord(t_ply *data, char *view)
 	}
 	data->hx_wall = data->xstep;
 	data->hy_wall = data->ystep;
+}
+
+void	take_distance(t_ply *data)
+{
+	double x;
+	double y;
+
+	x = (data->p_x - data->hx_wall) * (data->p_x - data->hx_wall);
+	y = (data->p_y - data->hy_wall) * (data->p_y - data->hy_wall);
+	data->h_distance = sqrt(x + y);
+	x = (data->p_x - data->vx_wall) * (data->p_x - data->vx_wall);
+	y = (data->p_y - data->vy_wall) * (data->p_y - data->vy_wall);
+	data->v_distance = sqrt(x + y);
+	if (data->h_distance <= data->v_distance)
+		data->len_ray = data->h_distance;
+	else
+		data->len_ray = data->v_distance;
+}
+void	push_rays(t_ply *data, double rad)
+{
+	int i = 0;
+	int	ox;
+	int	oy;
+
+	while (i <= data->len_ray)
+	{
+		ox = data->p_x - (i * cos(rad));
+		oy = data->p_y - (i * sin(rad));
+		my_mlx_pixel_put(data->mydata, ox, oy, 0x00FF0000);
+		i++;
+	}
+
 }

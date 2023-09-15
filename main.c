@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 12:34:29 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/15 23:51:24 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->start_y = data->p_y - data->radius;
 	data->end_y = data->p_y + data->radius;
 	data->nb_rays = 1000;
-	data->len_ray = 400;
 	data->angle = 60;
 }
 
@@ -72,9 +71,9 @@ int	move_player(int key, t_ply *data)
 	else if (key == 13)
 		data->p_y += -1 * data->speed;
 	else if (key == 124)
-		data->angle += 5;
+		data->angle += 1;
 	else if (key == 123)
-		data->angle -= 5;
+		data->angle -= 1;
 	return (0);
 }
 

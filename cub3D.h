@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 23:17:23 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/15 23:33:28 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_ply
 	int		radius;
 	int		nb_rays;
 	int		speed;
-	int		len_ray;
+	double	len_ray;
 	double	angle;
 	double	first_hx;
 	double	first_hy;
@@ -92,4 +92,6 @@ int			ft_strcmp(const char *s1, const char *s2);
 void		modify_depend_view(t_ply *data, char *view, double rad);
 void		hori_wall_cord(t_ply *data, char *view);
 void		verti_wall_cord(t_ply *data, char *view);
+void		take_distance(t_ply *data);
+void		push_rays(t_ply *data, double rad);
 #endif
