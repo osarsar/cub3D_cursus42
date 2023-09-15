@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/10 08:16:54 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/13 00:42:49 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void	put_pixel_to_image(t_ply *data, int i, int j)
 {
 	if (data->map[data->x][data->y] == '1')
-		my_mlx_pixel_put(data->data, i, j, 0x808080);
+		my_mlx_pixel_put(data->mydata, i, j, 0x808080);
 	else if (data->map[data->x][data->y] == '0')
-		my_mlx_pixel_put(data->data, i, j, 0x00FFFFFF);
+		my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
 	else if (data->map[data->x][data->y] == 'N')
 	{
-		my_mlx_pixel_put(data->data, i, j, 0x00FFFFFF);
-		if (data->o_x == 0 && data->o_y == 0)
+		my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
+		if (data->p_x == 0 && data->p_y == 0)
 		{
-			data->o_x = i + (80 / 2);
-			data->o_y = j + (80 / 2);
+			data->p_x = i + (80 / 2);
+			data->p_y = j + (80 / 2);
 		}
 	}
 }
@@ -55,12 +55,15 @@ void	creat_map_line(t_ply *data)
 				put_pixel_to_image(data, i, j);
 				j++;
 			}
+			//j --> horizontal
 			i++;
 		}
+		//i ---> vertical
 		data->y++;
 		data->nb_x += 80;
 	}
 }
+
 
 int	creat_map(t_ply *data)
 {
@@ -78,6 +81,6 @@ int	creat_map(t_ply *data)
 	}
 	put_player(data);
 	fov_player(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->data->img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->mydata->img, 0, 0);
 	return (0);
 }

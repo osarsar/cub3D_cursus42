@@ -1,43 +1,29 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/09/11 05:57:52 by stemsama          #+#    #+#              #
-#    Updated: 2023/09/14 07:54:20 by stemsama         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+SRCS = 	main.c	\
+		get_next_line.c	\
+		get_next_line_utils.c	\
+		ft_split.c		\
+		create_map.c	\
+		create_player.c	\
 
-NAME = cub3D
-CC = cc
+NAME = cub3D.a
 
-FLAGS = -Wall -Werror -Wextra -fsanitize=address -g
-VAR	  = -lmlx -framework OpenGL -framework AppKit
+FLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
 
-SRC = main.c get_next_line.c get_next_line_utils.c \
-		ft_split.c create_map.c create_player.c \
-		libft1.c libft2.c\
-		tools1.c tools2.c tools3.c tools4.c tools5.c\
+%.o : %.c cub3D.h
+	@echo "Compiling: $<"
+	@cc $(FLAGS) -c $< -o $@
 
-OBJECT = $(SRC:.c=.o)
+$(NAME) : $(SRCS:.c=.o)
+	@ar -r $(NAME) $(SRCS:.c=.o)
+	@cc $(FLAGS)  -lmlx -framework OpenGL -framework AppKit $(NAME) -o cub3D
 
 all : $(NAME)
 
-$(NAME) : $(OBJECT) cub3D.h
-	@$(CC) $(FLAGS)  $(OBJECT) -o $(NAME) $(VAR)
-
-%.o:%.c cub3D.h
-	@echo "Compiling: $<"
-	@$(CC) $(FLAGS) -c $< -o $@
-
 clean :
-	@rm -f $(OBJECT)
+	@rm -rf $(SRCS:.c=.o)
 
 fclean : clean
-	@rm -f $(NAME)
+	@rm -rf $(NAME)
+	@rm -rf cub3D
 
 re : fclean all
-
-.PHONY: clean fclean re all
