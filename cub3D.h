@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 08:39:24 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/15 23:17:23 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ double		deg_to_rad(double deg);
 void		first_hori_verti(t_ply *data, double rad);
 char		*check_view(double rad);
 int			ft_strcmp(const char *s1, const char *s2);
-
+void		modify_depend_view(t_ply *data, char *view, double rad);
+void		hori_wall_cord(t_ply *data, char *view);
+void		verti_wall_cord(t_ply *data, char *view);
 #endif

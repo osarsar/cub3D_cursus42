@@ -4,6 +4,7 @@ SRCS = 	main.c	\
 		ft_split.c		\
 		create_map.c	\
 		create_player.c	\
+		player_view.c	\
 
 NAME = cub3D.a
 
