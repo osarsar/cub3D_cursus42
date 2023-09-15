@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 23:51:24 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 00:18:21 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	main(int ac, char **av)
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
 			&data->mydata->bits_per_pixel, 
 			&data->mydata->line_length, &data->mydata->endian);
-	mlx_loop_hook (data->mlx, &creat_map, data);
-	mlx_hook (data->win, 2, 0, &move_player, data);
+	mlx_loop_hook(data->mlx, &creat_map, data);
+	mlx_hook(data->win, 2, 0, &move_player, data);
 	mlx_loop(data->mlx);
 }

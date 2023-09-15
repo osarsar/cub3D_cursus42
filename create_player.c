@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 23:48:36 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 00:09:30 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,42 +34,41 @@ void	put_player(t_ply *data)
 	}
 }
 
-void	first_hori_verti(t_ply *data, double rad)
+void	first_hori_verti(t_ply *data)
 {
 	data->first_hy = (data->p_y / 80) * 80;
-	data->first_hx = (data->first_hy - data->p_y / tan(rad));
+	data->first_hx = (data->first_hy - data->p_y / tan(data->rad));
 	data->first_vx = (data->p_x / 80) * 80;
-	data->first_vy = ((data->first_vx - data->p_x) * tan(rad));
+	data->first_vy = ((data->first_vx - data->p_x) * tan(data->rad));
 }
 
-void	padding(t_ply *data, double rad)
+void	padding(t_ply *data)
 {
 	data->h_dy = 80;
-	data->h_dx = data->h_dy / tan(rad);
+	data->h_dx = data->h_dy / tan(data->rad);
 	data->v_dx = 80;
-	data->v_dy = data->v_dx * tan(rad);
+	data->v_dy = data->v_dx * tan(data->rad);
 }
 
-void	init_angle(double *rad)
+void	init_angle(t_ply *data)
 {
-	*rad = fmod(*rad, (2 * M_PI));
-	if (*rad < 0)
-		*rad = (2 * M_PI) + *rad;
+	data->rad = fmod(data->rad, (2 * M_PI));
+	if (data->rad < 0)
+		data->rad = (2 * M_PI) + data->rad;
 }
 
 void	fov_player(t_ply *data)
 {
-	double	rad;
 	char	*view;
 
-	rad = deg_to_rad(data->angle);
-	init_angle(&rad);
-	view = check_view(rad);
-	first_hori_verti(data, rad);
-	padding(data, rad);
-	modify_depend_view(data, view, rad);
+	data->rad = deg_to_rad(data->angle);
+	init_angle(data);
+	view = check_view(data);
+	first_hori_verti(data);
+	padding(data);
+	modify_depend_view(data, view);
 	hori_wall_cord(data, view);
 	verti_wall_cord(data, view);
 	take_distance(data);
-	push_rays(data, rad);
+	push_rays(data);
 }

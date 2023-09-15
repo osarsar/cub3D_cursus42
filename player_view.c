@@ -6,61 +6,61 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 23:49:52 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 00:09:46 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char *check_view(double rad)
+char *check_view(t_ply *data)
 {
-	if ((rad >= 0 && rad <= M_PI))
+	if ((data->rad >= 0 && data->rad <= M_PI))
 	{
-		if (rad >= 0 && rad <= (0.5 * M_PI))
+		if (data->rad >= 0 && data->rad <= (0.5 * M_PI))
 			return ("up_left");
 		else
 			return ("up_right");
 	}
 	else
 	{
-		if ((rad >= M_PI && rad <= (M_PI + (0.5 * M_PI))))
+		if ((data->rad >= M_PI && data->rad <= (M_PI + (0.5 * M_PI))))
 			return ("down_left");
 		else
 			return ("down_right");
 	}
 }
 
-void	modify_depend_view(t_ply *data, char *view, double rad)
+void	modify_depend_view(t_ply *data, char *view)
 {
 	if (!ft_strcmp(view, "up_left"))
 	{
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->rad));
 		data->h_dx *= -1;
 		data->h_dy *= -1;
-		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(rad));
+		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->rad));
 		data->v_dy *= -1;
 		data->v_dx *= -1;
 	}
 	else if (!ft_strcmp(view, "up_right"))
 	{
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->rad));
 		data->h_dx *= -1;
 		data->h_dy *= -1;
 		data->first_vx += 80;
-		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(rad));
+		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->rad));
 	}
 	else if (!ft_strcmp(view, "down_left"))
 	{
 		data->first_hy += 80;
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->rad));
 		data->first_vx += 80;
-		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(rad));
+		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->rad));
 	}
 	else if (!ft_strcmp(view, "down_right"))
 	{
 		data->first_hy += 80;
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(rad));
-		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(rad));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->rad));
+		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->rad));
 		data->v_dy *= -1;
 		data->v_dx *= -1;
 	}
@@ -116,7 +116,7 @@ void	take_distance(t_ply *data)
 	else
 		data->len_ray = data->v_distance;
 }
-void	push_rays(t_ply *data, double rad)
+void	push_rays(t_ply *data)
 {
 	int i = 0;
 	int	ox;
@@ -124,8 +124,8 @@ void	push_rays(t_ply *data, double rad)
 
 	while (i <= data->len_ray)
 	{
-		ox = data->p_x - (i * cos(rad));
-		oy = data->p_y - (i * sin(rad));
+		ox = data->p_x - (i * cos(data->rad));
+		oy = data->p_y - (i * sin(data->rad));
 		my_mlx_pixel_put(data->mydata, ox, oy, 0x00FF0000);
 		i++;
 	}
