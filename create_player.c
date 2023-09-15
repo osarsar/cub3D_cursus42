@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 08:57:53 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/15 13:01:08 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,16 @@ void	take_distance(t_ply *data)
 	double x;
 	double y;
 
-	x = data->hx_wall * data->hx_wall;
-	y = data->hy_wall * data->hy_wall;
+	x = (data->p_x - data->hx_wall) * (data->p_x - data->hx_wall);
+	y = (data->p_y - data->hy_wall) * (data->p_y - data->hy_wall);
 	data->h_distance = sqrt(x + y);
-	x = data->vx_wall * data->vx_wall;
-	y = data->vy_wall * data->vy_wall;
+	x = (data->p_x - data->vx_wall) * (data->p_x - data->vx_wall);
+	y = (data->p_y - data->vy_wall) * (data->p_y - data->vy_wall);
 	data->v_distance = sqrt(x + y);
 	if (data->h_distance <= data->v_distance)
 		my_mlx_pixel_put(data->mydata, (int)data->hx_wall, (int)data->hy_wall, 0x00FF0000);
 	else
 		my_mlx_pixel_put(data->mydata, (int)data->vx_wall, data->vy_wall, 0x00FF0000);
-
-	printf("h_distance = %f\n", data->h_distance);
-	printf("v_distance = %f\n", data->v_distance);
 }
 void	fov_player(t_ply *data)
 {
@@ -177,9 +174,10 @@ void	fov_player(t_ply *data)
 	}
 	data->xstep = data->first_vx;
 	data->ystep = data->first_vy;
-	while (1)
+	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "down_right"))
+		data->xstep--;
+	while (data->xstep > 0 && data->ystep > 0 && data->ystep <= 1050 && data->xstep <= 1050)
 	{
-		// my_mlx_pixel_put(data->mydata, (int)data->xstep, (int)data->ystep, 0x00FF0000);
 		if (data->map[((int)data->ystep / 80)][((int)data->xstep / 80)] == '1')
 			break;
 		data->xstep += data->v_dx;
@@ -189,10 +187,11 @@ void	fov_player(t_ply *data)
 	data->vy_wall = data->ystep;
 	data->xstep = data->first_hx;
 	data->ystep = data->first_hy;
-	while (1)
+	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "up_right"))
+		data->ystep--;
+	while (data->xstep > 0 && data->ystep > 0 && data->ystep <= 1050 && data->xstep <= 1050)
 	{
-		// my_mlx_pixel_put(data->mydata, (int)data->xstep, (int)data->ystep, 0x00FF0000);
-		if (data->map[(int)data->xstep / 80][(int)data->ystep / 80] == '1')
+		if (data->map[(int)data->ystep / 80][(int)data->xstep / 80] == '1')
 			break;
 		data->xstep += data->h_dx;
 		data->ystep += data->h_dy;
@@ -200,7 +199,6 @@ void	fov_player(t_ply *data)
 	data->hx_wall = data->xstep;
 	data->hy_wall = data->ystep;
 	take_distance(data);
-	// my_mlx_pixel_put(data->mydata, (int)data->xstep, (int)data->ystep, 0x00FF0000);
 	//push_rays(data, rad);
 	// if (!ft_strcmp(view, "up_right") || !ft_strcmp(view, "up_left"))
 	// 	data->ystep--;
