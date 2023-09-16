@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/16 00:09:30 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 02:51:39 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,38 +37,46 @@ void	put_player(t_ply *data)
 void	first_hori_verti(t_ply *data)
 {
 	data->first_hy = (data->p_y / 80) * 80;
-	data->first_hx = (data->first_hy - data->p_y / tan(data->rad));
+	data->first_hx = (data->first_hy - data->p_y / tan(data->ray));
 	data->first_vx = (data->p_x / 80) * 80;
-	data->first_vy = ((data->first_vx - data->p_x) * tan(data->rad));
+	data->first_vy = ((data->first_vx - data->p_x) * tan(data->ray));
 }
 
 void	padding(t_ply *data)
 {
 	data->h_dy = 80;
-	data->h_dx = data->h_dy / tan(data->rad);
+	data->h_dx = data->h_dy / tan(data->ray);
 	data->v_dx = 80;
-	data->v_dy = data->v_dx * tan(data->rad);
+	data->v_dy = data->v_dx * tan(data->ray);
 }
 
 void	init_angle(t_ply *data)
 {
-	data->rad = fmod(data->rad, (2 * M_PI));
-	if (data->rad < 0)
-		data->rad = (2 * M_PI) + data->rad;
+	data->ray = fmod(data->ray, (2 * M_PI));
+	if (data->ray < 0)
+		data->ray = (2 * M_PI) + data->ray;
 }
 
 void	fov_player(t_ply *data)
 {
 	char	*view;
+	int		colomn;
 
+	colomn = 0;
 	data->rad = deg_to_rad(data->angle);
-	init_angle(data);
-	view = check_view(data);
-	first_hori_verti(data);
-	padding(data);
-	modify_depend_view(data, view);
-	hori_wall_cord(data, view);
-	verti_wall_cord(data, view);
-	take_distance(data);
-	push_rays(data);
+	data->ray = data->rad;
+	while (colomn <= 500)
+	{
+		init_angle(data);
+		view = check_view(data);
+		first_hori_verti(data);
+		padding(data);
+		modify_depend_view(data, view);
+		hori_wall_cord(data, view);
+		verti_wall_cord(data, view);
+		take_distance(data);
+		push_rays(data);
+		data->ray += 0.001;
+		colomn++;
+	}
 }
