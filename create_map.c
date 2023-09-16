@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/15 23:27:02 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 02:06:40 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	put_pixel_to_image(t_ply *data, int i, int j)
 {
-	if (data->map[data->x][data->y] == '1')
+	if (data->map[data->x][data->y] == '1'
+		|| data->map[data->x][data->y] == '=')
 		my_mlx_pixel_put(data->mydata, i, j, 0x808080);
 	else if (data->map[data->x][data->y] == '0')
 		my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
-	else if (data->map[data->x][data->y] == 'N')
+	else if (data->map[data->x][data->y] == 'N'
+		|| data->map[data->x][data->y] == 'S'
+		|| data->map[data->x][data->y] == 'W'
+		|| data->map[data->x][data->y] == 'E')
 	{
 		my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
 		if (data->p_x == 0 && data->p_y == 0)

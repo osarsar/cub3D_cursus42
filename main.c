@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/16 00:18:21 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 02:07:27 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->p_y = 0;
 	data->nb_x = 80;
 	data->nb_y = 80;
-	data->speed = 20;
+	data->speed = 30;
 	data->map = NULL;
 	data->start_j = 0;
 	data->radius = 7;
@@ -33,24 +33,6 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->end_y = data->p_y + data->radius;
 	data->nb_rays = 1000;
 	data->angle = 60;
-}
-
-void	collect_map(t_ply *data)
-{
-	char	*line;
-	char	*join_lines;
-	int		fd;
-
-	join_lines = NULL;
-	fd = open("map.cub", O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		join_lines = ft_strjoin(join_lines, line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	data->map = ft_split(join_lines, '\n');
 }
 
 double	deg_to_rad(double deg)
@@ -71,9 +53,9 @@ int	move_player(int key, t_ply *data)
 	else if (key == 13)
 		data->p_y += -1 * data->speed;
 	else if (key == 124)
-		data->angle += 1;
+		data->angle += 5;
 	else if (key == 123)
-		data->angle -= 1;
+		data->angle -= 5;
 	return (0);
 }
 
@@ -83,15 +65,15 @@ int	main(int ac, char **av)
 
 	data = malloc(sizeof(t_ply));
 	if (!data)
-		return (0);
+		affiche_er(2);
 	data->mydata = malloc(sizeof(t_data));
 	if (!data->mydata)
 	{
 		free(data);
-		return (0);
+		affiche_er(2);
 	}
 	init_data(data, ac, av);
-	collect_map(data);
+	pars(data, ac, av);
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 1040, 1040, "Hello world!");
 	data->mydata->img = mlx_new_image(data->mlx, 1050, 1050);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/16 00:09:46 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 02:10:30 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char *check_view(t_ply *data)
+char	*check_view(t_ply *data)
 {
 	if ((data->rad >= 0 && data->rad <= M_PI))
 	{
@@ -75,7 +75,7 @@ void	hori_wall_cord(t_ply *data, char *view)
 	while (data->xstep > 0 && data->ystep > 0 && data->ystep < 1040 && data->xstep < 1040)
 	{
 		if (data->map[((int)data->ystep / 80)][((int)data->xstep / 80)] == '1')
-			break;
+			break ;
 		data->xstep += data->v_dx;
 		data->ystep += data->v_dy;
 	}
@@ -92,7 +92,7 @@ void	verti_wall_cord(t_ply *data, char *view)
 	while (data->xstep > 0 && data->ystep > 0 && data->ystep < 1040 && data->xstep < 1040)
 	{
 		if (data->map[(int)data->ystep / 80][(int)data->xstep / 80] == '1')
-			break;
+			break ;
 		data->xstep += data->h_dx;
 		data->ystep += data->h_dy;
 	}
@@ -102,8 +102,8 @@ void	verti_wall_cord(t_ply *data, char *view)
 
 void	take_distance(t_ply *data)
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
 
 	x = (data->p_x - data->hx_wall) * (data->p_x - data->hx_wall);
 	y = (data->p_y - data->hy_wall) * (data->p_y - data->hy_wall);
@@ -116,12 +116,14 @@ void	take_distance(t_ply *data)
 	else
 		data->len_ray = data->v_distance;
 }
+
 void	push_rays(t_ply *data)
 {
-	int i = 0;
+	int	i;
 	int	ox;
 	int	oy;
 
+	i = 0;
 	while (i <= data->len_ray)
 	{
 		ox = data->p_x - (i * cos(data->rad));
@@ -129,5 +131,4 @@ void	push_rays(t_ply *data)
 		my_mlx_pixel_put(data->mydata, ox, oy, 0x00FF0000);
 		i++;
 	}
-
 }
