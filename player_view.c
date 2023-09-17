@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 05:06:49 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 07:36:23 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*check_view_player(t_ply *data)
 			return ("down_right");
 	}
 }
+
 char	*check_view(t_ply *data)
 {
 	if ((data->fov >= 0 && data->fov <= M_PI))

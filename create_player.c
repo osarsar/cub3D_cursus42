@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 05:04:34 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 08:02:10 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void draw_map_3d(t_ply *data, int colomn)
 	while (line < data->height_f_wall)
 	{
 		if (line < start_wall)
-			my_mlx_pixel_put(data->mydata, colomn, line, 0x0000FF);
+			my_mlx_pixel_put(data->mydata, colomn, line, 0xAABBFF);
 		else if ((line >= start_wall) && (line <= end_wall))
 			my_mlx_pixel_put(data->mydata, colomn, line, 0xFFA500);
 		else if (line > end_wall)
@@ -83,11 +83,16 @@ void draw_map_3d(t_ply *data, int colomn)
 		line++;
 	}
 }
+void	init_angle_2pi(t_ply *data)
+{
+	data->fov = fmod(data->fov, (2 * M_PI));
+	if (data->fov < 0)
+		data->fov = (2 * M_PI) + data->fov;
+}
 
 void	fov_player(t_ply *data)
 {
 	char	*view;
-	char	*player_view;
 	int		colomn;
 	double	rad;
 	int		i;
@@ -97,36 +102,34 @@ void	fov_player(t_ply *data)
 	data->face_rad = deg_to_rad(data->face_angle);
 	init_angle(data);
 	rad = deg_to_rad(data->angle);
-	data->rad = data->face_rad - (rad / 2); ///hereeee
+	data->rad = data->face_rad - (rad / 2);
 	data->fov = data->rad;
-	// data->fov = data->rad;
-		// if (colomn == data->width_f_wall / 2)
-		// {
 	while (colomn <= 200)
 	{
-			int j = 0;
-			while (j <= 50)
-			{
-				int ox = data->p_x - (j * cos(data->face_rad));
-				int oy = data->p_y - (j * sin(data->face_rad));
-				my_mlx_pixel_put(data->mydata, ox, oy, 0x0000FF);
-				j++;
-			}		
-		// }
-		player_view = check_view_player(data);
+		draw_view(data);
+		init_angle_2pi(data);
 		view = check_view(data);
-		printf("view = %s\n", view);
 		first_hori_verti(data);
 		padding(data);
 		modify_depend_view(data, view);
 		hori_wall_cord(data, view);
 		verti_wall_cord(data, view);
 		take_distance(data);
-			printf("fata->fov = %f\n", data->fov);
 		push_rays(data);
-
 		data->fov += rad / 200;
-		// draw_map_3d(data, colomn);
+		draw_map_3d(data, colomn);
 		colomn++;
 	}
+}
+
+void	draw_view(t_ply *data)
+{
+	int j = 0;
+	while (j <= 50)
+	{
+		int ox = data->p_x - (j * cos(data->face_rad));
+		int oy = data->p_y - (j * sin(data->face_rad));
+		my_mlx_pixel_put(data->mydata, ox, oy, 0x0000FF);
+		j++;
+	}	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 00:54:51 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/17 07:35:34 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	put_pixel_to_image(t_ply *data, int i, int j)
 		my_mlx_pixel_put(data->mydata, i, j, 0x808080);
 	else if (data->map[data->x][data->y] == '0')
 		my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
-	else if (data->map[data->x][data->y] == 'N'
+	if (data->map[data->x][data->y] == 'N'
 		|| data->map[data->x][data->y] == 'S'
 		|| data->map[data->x][data->y] == 'W'
 		|| data->map[data->x][data->y] == 'E')
