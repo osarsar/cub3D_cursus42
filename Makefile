@@ -14,7 +14,7 @@ VAR	  = -lmlx -framework OpenGL -framework AppKit
 SRC = main.c get_next_line.c get_next_line_utils.c \
 		libft1.c libft2.c libft3.c \
 		tools1.c tools2.c tools3.c tools4.c tools5.c\
-		create_map.c create_player.c player_view.c	\
+		create_map.c create_player.c player_view.c	view.c\
 
 OBJECT = $(SRC:.c=.o)
 

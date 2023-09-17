@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 08:00:28 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 08:58:10 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ void		push_rays(t_ply *data);
 int			move_player(int key, t_ply *data);
 char		*check_view_player(t_ply *data);
 void		draw_view(t_ply *data);
+void		view_to_start(t_ply *data);
+double	    init_rad(t_ply *data, double rad);
+void		init_angle_2pi(t_ply *data);
 
 //-----------------------------------------------------> stemsama
 //-----------------------------------------------------> tols1.c

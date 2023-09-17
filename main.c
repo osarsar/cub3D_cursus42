@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 07:56:21 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 08:35:36 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->start_y = data->p_y - data->radius;
 	data->end_y = data->p_y + data->radius;
 	data->nb_rays = 1000;
-	data->face_angle = 100;
 	data->angle = 60;
 }
 
@@ -101,14 +100,14 @@ int	move_player(int key, t_ply *data)
 	if (key == 53)
 		exit(1);
 	else if (key == RIGHT)
-		data->p_x +=1 * data->speed;
-		//move_player_2(data, key);
+		move_player_2(data, key);
+		// data->p_x +=1 * data->speed;
 	else if (key == LEFT)
-		data->p_x -=1 * data->speed;
-		//move_player_2(data, key);
+		move_player_2(data, key);
+		// data->p_x -=1 * data->speed;
 	else if (key == DOWN)
-		data->p_y +=1 * data->speed;
-		//move_player_2(data, key);
+		move_player_2(data, key);
+		// data->p_y +=1 * data->speed;
 	else if (key == UP)
 	{
 		move_player_2(data, key);
@@ -138,7 +137,7 @@ int	main(int ac, char **av)
 	init_data(data, ac, av);
 	pars(data, ac, av);
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, data->width_f_wall, data->height_f_wall, "Hello world!");
+	data->win = mlx_new_window(data->mlx, data->width_f_wall, data->height_f_wall, "3D_game");
 	data->mydata->img = mlx_new_image(data->mlx, data->width_f_wall + 1, data->height_f_wall + 1);
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
 			&data->mydata->bits_per_pixel, 

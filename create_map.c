@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 07:35:34 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 08:37:01 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	put_pixel_to_image(t_ply *data, int i, int j)
 		my_mlx_pixel_put(data->mydata, i, j, 0x808080);
 	else if (data->map[data->x][data->y] == '0')
 		my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
-	if (data->map[data->x][data->y] == 'N'
+	else if (data->map[data->x][data->y] == 'N'
 		|| data->map[data->x][data->y] == 'S'
 		|| data->map[data->x][data->y] == 'W'
 		|| data->map[data->x][data->y] == 'E')
@@ -37,6 +37,7 @@ void	put_pixel_to_image(t_ply *data, int i, int j)
 		{
 			data->p_x = i + (NUM_PIXELS / 2);
 			data->p_y = j + (NUM_PIXELS / 2);
+			view_to_start(data);
 		}
 	}
 }
