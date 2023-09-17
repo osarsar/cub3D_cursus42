@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 00:58:38 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/17 05:04:34 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,24 @@ void	put_player(t_ply *data)
 void	first_hori_verti(t_ply *data)
 {
 	data->first_hy = (data->p_y / NUM_PIXELS) * NUM_PIXELS;
-	data->first_hx = (data->first_hy - data->p_y / tan(data->ray));
+	data->first_hx = (data->first_hy - data->p_y / tan(data->fov));
 	data->first_vx = (data->p_x / NUM_PIXELS) * NUM_PIXELS;
-	data->first_vy = ((data->first_vx - data->p_x) * tan(data->ray));
+	data->first_vy = ((data->first_vx - data->p_x) * tan(data->fov));
 }
 
 void	padding(t_ply *data)
 {
 	data->h_dy = NUM_PIXELS;
-	data->h_dx = data->h_dy / tan(data->ray);
+	data->h_dx = data->h_dy / tan(data->fov);
 	data->v_dx = NUM_PIXELS;
-	data->v_dy = data->v_dx * tan(data->ray);
+	data->v_dy = data->v_dx * tan(data->fov);
 }
 
 void	init_angle(t_ply *data)
 {
-	data->ray = fmod(data->ray, (2 * M_PI));
-	if (data->ray < 0)
-		data->ray = (2 * M_PI) + data->ray;
+	data->face_rad = fmod(data->face_rad, (2 * M_PI));
+	if (data->face_rad < 0)
+		data->face_rad = (2 * M_PI) + data->face_rad;
 }
 
 void draw_map_3d(t_ply *data, int colomn)
@@ -87,35 +87,45 @@ void draw_map_3d(t_ply *data, int colomn)
 void	fov_player(t_ply *data)
 {
 	char	*view;
+	char	*player_view;
 	int		colomn;
+	double	rad;
+	int		i;
 
+	i = 0;
 	colomn = 0;
-	data->rad = deg_to_rad(data->angle);
-	data->ray = data->rad;
-	while (colomn <= data->width_f_wall)
+	data->face_rad = deg_to_rad(data->face_angle);
+	init_angle(data);
+	rad = deg_to_rad(data->angle);
+	data->rad = data->face_rad - (rad / 2); ///hereeee
+	data->fov = data->rad;
+	// data->fov = data->rad;
+		// if (colomn == data->width_f_wall / 2)
+		// {
+	while (colomn <= 200)
 	{
-		init_angle(data);
+			int j = 0;
+			while (j <= 50)
+			{
+				int ox = data->p_x - (j * cos(data->face_rad));
+				int oy = data->p_y - (j * sin(data->face_rad));
+				my_mlx_pixel_put(data->mydata, ox, oy, 0x0000FF);
+				j++;
+			}		
+		// }
+		player_view = check_view_player(data);
 		view = check_view(data);
+		printf("view = %s\n", view);
 		first_hori_verti(data);
 		padding(data);
 		modify_depend_view(data, view);
 		hori_wall_cord(data, view);
 		verti_wall_cord(data, view);
 		take_distance(data);
+			printf("fata->fov = %f\n", data->fov);
 		push_rays(data);
-		if (colomn == data->width_f_wall / 2)
-		{
-			int i = 0;
-			while (i <= data->len_ray)
-			{
-				data->face_angle = data->ray;
-				int ox = data->p_x - (i * cos(data->face_angle));
-				int oy = data->p_y - (i * sin(data->face_angle));
-				my_mlx_pixel_put(data->mydata, ox, oy, 0x0000FF);
-				i++;
-			}		
-		}
-		data->ray += 0.001;
+
+		data->fov += rad / 200;
 		// draw_map_3d(data, colomn);
 		colomn++;
 	}

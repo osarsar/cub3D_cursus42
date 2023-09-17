@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 00:57:40 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/17 04:52:28 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->start_y = data->p_y - data->radius;
 	data->end_y = data->p_y + data->radius;
 	data->nb_rays = 1000;
+	data->face_angle = 90;
 	data->angle = 60;
 }
 
@@ -43,8 +44,8 @@ double	deg_to_rad(double deg)
 //124 right
 int	move_player_2(t_ply *data, int key)
 {
-	int		x;
-	int		y;
+	// int		x;
+	// int		y;
 	int		x_tmp;
 	int		y_tmp;
 
@@ -77,18 +78,18 @@ int	move_player_2(t_ply *data, int key)
 		data->p_y -= sin(M_PI - data->face_angle) * data->speed;
 	}
 	//check wall
-	x = (int)(data->p_x / NUM_PIXELS);
-	y = (int)(data->p_y / NUM_PIXELS);
-	printf("data->p_y %d\n", y);
-	if (x < 0 || y < 0
-		|| x >= ((data->width_f_wall / NUM_PIXELS) - 1) || y >= ((data->height_f_wall / NUM_PIXELS) - 1)
-		|| data->map[y][x] == '1')
-	{
-		printf("-->::\n\n");
-		data->p_x = x_tmp;
-		data->p_y = y_tmp;
-		printf("data->map[y][x] = %c\n", data->map[y][x]);
-	}
+	// x = (int)(data->p_x / NUM_PIXELS);
+	// y = (int)(data->p_y / NUM_PIXELS);
+	// printf("data->p_y %d\n", y);
+	// if (x < 0 || y < 0
+	// 	|| x >= ((data->width_f_wall / NUM_PIXELS) - 1) || y >= ((data->height_f_wall / NUM_PIXELS) - 1)
+	// 	|| data->map[y][x] == '1')
+	// {
+	// 	printf("-->::\n\n");
+	// 	data->p_x = x_tmp;
+	// 	data->p_y = y_tmp;
+	// 	printf("data->map[y][x] = %c\n", data->map[y][x]);
+	// }
 	return (0);
 }
 //13 - up
@@ -100,17 +101,21 @@ int	move_player(int key, t_ply *data)
 	if (key == 53)
 		exit(1);
 	else if (key == RIGHT)
-		move_player_2(data, key);
+		data->p_x +=1 * data->speed;
+		//move_player_2(data, key);
 	else if (key == LEFT)
-		move_player_2(data, key);
+		data->p_x -=1 * data->speed;
+		//move_player_2(data, key);
 	else if (key == DOWN)
-		move_player_2(data, key);
+		data->p_y +=1 * data->speed;
+		//move_player_2(data, key);
 	else if (key == UP)
-		move_player_2(data, key);
+		data->p_y -=1 * data->speed;
+		//move_player_2(data, key);
 	else if (key == 124)
-		data->angle += 5;
+		data->face_angle += 5;
 	else if (key == 123)
-		data->angle -= 5;
+		data->face_angle -= 5;
 	return (0);
 }
 

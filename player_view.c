@@ -3,27 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 00:56:17 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/17 05:06:49 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-char	*check_view(t_ply *data)
+char	*check_view_player(t_ply *data)
 {
-	if ((data->face_angle >= 0 && data->face_angle <= M_PI))
+	if ((data->face_rad >= 0 && data->face_rad <= M_PI))
 	{
-		if (data->face_angle >= 0 && data->face_angle <= (0.5 * M_PI))
+		if (data->face_rad >= 0 && data->face_rad <= (0.5 * M_PI))
 			return ("up_left");
 		else
 			return ("up_right");
 	}
 	else
 	{
-		if ((data->face_angle >= M_PI && data->face_angle <= (M_PI + (0.5 * M_PI))))
+		if ((data->face_rad >= M_PI && data->face_rad <= (M_PI + (0.5 * M_PI))))
+			return ("down_left");
+		else
+			return ("down_right");
+	}
+}
+char	*check_view(t_ply *data)
+{
+	if ((data->fov >= 0 && data->fov <= M_PI))
+	{
+		if (data->fov >= 0 && data->fov <= (0.5 * M_PI))
+			return ("up_left");
+		else
+			return ("up_right");
+	}
+	else
+	{
+		if ((data->fov >= M_PI && data->fov <= (M_PI + (0.5 * M_PI))))
 			return ("down_left");
 		else
 			return ("down_right");
@@ -34,33 +51,33 @@ void	modify_depend_view(t_ply *data, char *view)
 {
 	if (!ft_strcmp(view, "up_left"))
 	{
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->ray));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
 		data->h_dx *= -1;
 		data->h_dy *= -1;
-		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->ray));
+		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->fov));
 		data->v_dy *= -1;
 		data->v_dx *= -1;
 	}
 	else if (!ft_strcmp(view, "up_right"))
 	{
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->ray));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
 		data->h_dx *= -1;
 		data->h_dy *= -1;
 		data->first_vx += NUM_PIXELS;
-		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->ray));
+		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->fov));
 	}
 	else if (!ft_strcmp(view, "down_left"))
 	{
 		data->first_hy += NUM_PIXELS;
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->ray));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
 		data->first_vx += NUM_PIXELS;
-		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->ray));
+		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->fov));
 	}
 	else if (!ft_strcmp(view, "down_right"))
 	{
 		data->first_hy += NUM_PIXELS;
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->ray));
-		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->ray));
+		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
+		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->fov));
 		data->v_dy *= -1;
 		data->v_dx *= -1;
 	}
@@ -70,7 +87,6 @@ void	verti_wall_cord(t_ply *data, char *view)
 {
 	data->xstep = data->first_vx;
 	data->ystep = data->first_vy;
-	(void)view;
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "down_right"))
 		data->xstep--;
 	while (data->xstep > 0 && data->ystep > 0
@@ -94,7 +110,7 @@ void	hori_wall_cord(t_ply *data, char *view)
 	while (data->xstep > 0 && data->ystep > 0
 		&& data->ystep < data->height_f_wall && data->xstep < data->width_f_wall)
 	{
-		if (data->map[(int)data->ystep / NUM_PIXELS][(int)data->xstep / NUM_PIXELS] == '1')
+		if (data->map[(int)(data->ystep) / NUM_PIXELS][(int)(data->xstep) / NUM_PIXELS] == '1')
 			break ;
 		data->xstep += data->h_dx;
 		data->ystep += data->h_dy;
@@ -131,8 +147,8 @@ void	push_rays(t_ply *data)
 	i = 0;
 	while (i <= data->len_ray)
 	{
-		ox = data->p_x - (i * cos(data->ray));
-		oy = data->p_y - (i * sin(data->ray));
+		ox = data->p_x - (i * cos(data->fov));
+		oy = data->p_y - (i * sin(data->fov));
 		my_mlx_pixel_put(data->mydata, ox, oy, 0x00FF0000);
 		i++;
 	}
