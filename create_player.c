@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 21:09:48 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 23:29:48 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,26 @@ void	padding(t_ply *data)
 	data->v_dy = data->v_dx * tan(data->fov);
 }
 
-void	draw_map_3d(t_ply *data, int colomn)
+int get_ofset_colomn()
 {
-	int	wall_height;
-	int	start_wall;
-	int	end_wall;
-	int	line;
+	// int	ofset_colomn;
 
-	wall_height = (data->width_f_wall * 80) / data->len_ray;//(data->height_of_win * NUM_PIXELS)
+	// ofset_colomn = data->
+	return 1;
+}
+
+void draw_map_3d(t_ply *data, int colomn)
+{
+	int wall_height;
+	int start_wall;
+	int end_wall;
+	int line;
+	int	ofset_colomn;
+	int	ofset_line;
+
+	wall_height = (data->width_f_wall * NUM_PIXELS) / data->len_ray;//(data->height_of_win * NUM_PIXELS)
 	start_wall = (data->height_f_wall / 2) - (wall_height / 2);
+	ofset_colomn = get_ofset_colomn();
 	if (start_wall <= 0)
 		start_wall = 0;
 	end_wall = (data->height_f_wall / 2) + (wall_height / 2);
@@ -68,9 +79,12 @@ void	draw_map_3d(t_ply *data, int colomn)
 	while (line < data->height_f_wall)
 	{
 		if (line < start_wall)
-			my_mlx_pixel_put(data->mydata, colomn, line, 0xAABBFF);
+			my_mlx_pixel_put(data->mydata, colomn, line, 0x0000FF);
 		else if ((line >= start_wall) && (line <= end_wall))
+		{
+			ofset_line = (line - start_wall) * (NUM_PIXELS / data->height_f_wall);
 			my_mlx_pixel_put(data->mydata, colomn, line, 0xFFA500);
+		}
 		else if (line > end_wall)
 			my_mlx_pixel_put(data->mydata, colomn, line, 0x00FF00);
 		line++;
@@ -101,7 +115,7 @@ void	fov_player(t_ply *data)
 		take_distance(data);
 		push_rays(data);
 		data->fov += rad / data->width_f_wall;
-		//draw_map_3d(data, colomn);
+		draw_map_3d(data, colomn);
 		colomn++;
 	}
 }

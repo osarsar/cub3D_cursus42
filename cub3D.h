@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 08:58:10 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 22:33:18 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,4 +163,8 @@ int			ft_strncmp(const char *s1, const char *s2, size_t len);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(char *str);
 int			ft_atoi_trois(void);
+
+//-----------------------------------------------------> textures.c
+void		ft_texture(t_ply	*data);
+
 #endif

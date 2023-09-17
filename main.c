@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 08:35:36 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 23:28:44 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,68 @@ int	move_player_2(t_ply *data, int key)
 	int		y;
 	int		x_tmp;
 	int		y_tmp;
+	char 	*view;
 
 	x_tmp = data->p_x;
 	y_tmp = data->p_y;
+	view = check_view_player(data);
 	//new position x and y
 	printf("key = %d\n", key);
-	if (key == RIGHT)
+	if (key == UP)
 	{
-		printf("up\n");
-		data->p_x += cos(data->face_angle) * data->speed;
-		data->p_y += sin(data->face_angle) * data->speed;
-	}
-	else if (key == LEFT)
-	{
-		printf("down\n");
-		data->p_x -= cos(data->face_angle) * data->speed;
-		data->p_y -= sin(data->face_angle) * data->speed;
+		if (!ft_strcmp(view, "up_right"))
+		{
+			data->p_x += cos(M_PI - data->face_rad) * data->speed;
+			data->p_y -= sin(M_PI - data->face_rad) * data->speed;
+		}
+		if (!ft_strcmp(view, "up_left"))
+		{
+			data->p_x += cos(M_PI - data->face_rad) * data->speed;
+			data->p_y -= sin(M_PI - data->face_rad) * data->speed;
+		}
+		if (!ft_strcmp(view, "down_right"))
+		{
+			data->p_x += cos(data->face_rad - M_PI) * data->speed;
+			data->p_y += sin(data->face_rad - M_PI) * data->speed;
+		}
+		if (!ft_strcmp(view, "down_left"))
+		{
+			data->p_x += cos(data->face_rad - M_PI) * data->speed;
+			data->p_y += sin(data->face_rad - M_PI) * data->speed;
+		}
 	}
 	else if (key == DOWN)
 	{
-		printf("right\n");
-		data->p_x -= cos(M_PI - data->face_angle) * data->speed;
-		data->p_y += sin(M_PI - data->face_angle) * data->speed;
+		if (!ft_strcmp(view, "up_right"))
+		{
+			data->p_x += cos(data->face_rad) * data->speed;
+			data->p_y += sin(data->face_rad) * data->speed;
+		}
+		if (!ft_strcmp(view, "up_left"))
+		{
+			data->p_x += cos(data->face_rad) * data->speed;
+			data->p_y += sin(data->face_rad) * data->speed;
+		}
+		if (!ft_strcmp(view, "down_right"))
+		{
+			data->p_x -= cos(data->face_rad - M_PI) * data->speed;
+			data->p_y -= sin(data->face_rad - M_PI) * data->speed;
+		}
+		if (!ft_strcmp(view, "down_left"))
+		{
+			data->p_x -= M_PI + cos(data->face_rad - M_PI) * data->speed;
+			data->p_y -= M_PI + sin(data->face_rad - M_PI) * data->speed;
+		}
 	}
-	else if (key == UP)
+	else if (key == RIGHT)
 	{
-		printf("left\n");
-		data->p_x += cos(M_PI - data->face_angle) * data->speed;
-		data->p_y -= sin(M_PI - data->face_angle) * data->speed;
+		data->p_x -= cos(data->face_rad + (M_PI * 0.5)) * data->speed;
+		data->p_y -= sin(data->face_rad + (M_PI * 0.5)) * data->speed;
+	}
+	else if (key == LEFT)
+	{
+		data->p_x += cos(data->face_rad + (M_PI * 0.5)) * data->speed;
+		data->p_y += sin(data->face_rad + (M_PI * 0.5)) * data->speed;
 	}
 	// check wall
 	x = (int)(data->p_x / NUM_PIXELS);
@@ -100,20 +134,25 @@ int	move_player(int key, t_ply *data)
 	if (key == 53)
 		exit(1);
 	else if (key == RIGHT)
+	{
+		printf("RIGHT\n");
 		move_player_2(data, key);
-		// data->p_x +=1 * data->speed;
+	}
 	else if (key == LEFT)
+	{
+		printf("LEFT\n");
 		move_player_2(data, key);
-		// data->p_x -=1 * data->speed;
+	}
 	else if (key == DOWN)
+	{
+		printf("DOWN\n");
 		move_player_2(data, key);
-		// data->p_y +=1 * data->speed;
+	}
 	else if (key == UP)
 	{
+		printf("up\n");
 		move_player_2(data, key);
-		
 	}
-		//data->p_y -=1 * data->speed;
 	else if (key == 124)
 		data->face_angle += 5;
 	else if (key == 123)
