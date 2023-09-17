@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/16 02:44:27 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/17 00:56:17 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*check_view(t_ply *data)
 {
-	if ((data->ray >= 0 && data->ray <= M_PI))
+	if ((data->face_angle >= 0 && data->face_angle <= M_PI))
 	{
-		if (data->ray >= 0 && data->ray <= (0.5 * M_PI))
+		if (data->face_angle >= 0 && data->face_angle <= (0.5 * M_PI))
 			return ("up_left");
 		else
 			return ("up_right");
 	}
 	else
 	{
-		if ((data->ray >= M_PI && data->ray <= (M_PI + (0.5 * M_PI))))
+		if ((data->face_angle >= M_PI && data->face_angle <= (M_PI + (0.5 * M_PI))))
 			return ("down_left");
 		else
 			return ("down_right");
@@ -46,19 +46,19 @@ void	modify_depend_view(t_ply *data, char *view)
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->ray));
 		data->h_dx *= -1;
 		data->h_dy *= -1;
-		data->first_vx += 80;
+		data->first_vx += NUM_PIXELS;
 		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->ray));
 	}
 	else if (!ft_strcmp(view, "down_left"))
 	{
-		data->first_hy += 80;
+		data->first_hy += NUM_PIXELS;
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->ray));
-		data->first_vx += 80;
+		data->first_vx += NUM_PIXELS;
 		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->ray));
 	}
 	else if (!ft_strcmp(view, "down_right"))
 	{
-		data->first_hy += 80;
+		data->first_hy += NUM_PIXELS;
 		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->ray));
 		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->ray));
 		data->v_dy *= -1;
@@ -66,15 +66,17 @@ void	modify_depend_view(t_ply *data, char *view)
 	}
 }
 
-void	hori_wall_cord(t_ply *data, char *view)
+void	verti_wall_cord(t_ply *data, char *view)
 {
 	data->xstep = data->first_vx;
 	data->ystep = data->first_vy;
+	(void)view;
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "down_right"))
 		data->xstep--;
-	while (data->xstep > 0 && data->ystep > 0 && data->ystep < 1040 && data->xstep < 1040)
+	while (data->xstep > 0 && data->ystep > 0
+		&& data->ystep < data->height_f_wall && data->xstep < data->width_f_wall)
 	{
-		if (data->map[((int)data->ystep / 80)][((int)data->xstep / 80)] == '1')
+		if (data->map[((int)data->ystep / NUM_PIXELS)][((int)data->xstep / NUM_PIXELS)] == '1')
 			break ;
 		data->xstep += data->v_dx;
 		data->ystep += data->v_dy;
@@ -83,15 +85,16 @@ void	hori_wall_cord(t_ply *data, char *view)
 	data->vy_wall = data->ystep;
 }
 
-void	verti_wall_cord(t_ply *data, char *view)
+void	hori_wall_cord(t_ply *data, char *view)
 {
 	data->xstep = data->first_hx;
 	data->ystep = data->first_hy;
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "up_right"))
 		data->ystep--;
-	while (data->xstep > 0 && data->ystep > 0 && data->ystep < 1040 && data->xstep < 1040)
+	while (data->xstep > 0 && data->ystep > 0
+		&& data->ystep < data->height_f_wall && data->xstep < data->width_f_wall)
 	{
-		if (data->map[(int)data->ystep / 80][(int)data->xstep / 80] == '1')
+		if (data->map[(int)data->ystep / NUM_PIXELS][(int)data->xstep / NUM_PIXELS] == '1')
 			break ;
 		data->xstep += data->h_dx;
 		data->ystep += data->h_dy;
@@ -115,6 +118,8 @@ void	take_distance(t_ply *data)
 		data->len_ray = data->h_distance;
 	else
 		data->len_ray = data->v_distance;
+	if (data->len_ray == 0)
+		data->len_ray = 1;
 }
 
 void	push_rays(t_ply *data)

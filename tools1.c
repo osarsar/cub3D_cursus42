@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 05:09:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/16 02:14:27 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/16 18:24:42 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,4 +129,6 @@ void	pars(t_ply	*data, int ac, char **av)
 	data->c_2 = 0;
 	data->c_3 = 0;
 	get_map(fd, data);
+	data->height_f_wall = size_map_line(data->map) * NUM_PIXELS;
+	data->width_f_wall = max_size_col(data->map) * NUM_PIXELS;
 }

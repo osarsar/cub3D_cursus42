@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/16 02:42:18 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/16 23:12:58 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include <mlx.h>
 # include <math.h>
 
+# define NUM_PIXELS 80
+# define UP 13
+# define DOWN 1
+# define RIGHT 2
+# define LEFT 0
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -31,6 +36,8 @@ typedef struct s_data {
 
 typedef struct s_ply
 {
+	int		height_f_wall;
+	int		width_f_wall;
 	char	**map;
 	char	**av;
 	int		ac;
@@ -52,7 +59,8 @@ typedef struct s_ply
 	int		nb_rays;
 	int		speed;
 	double	rad;
-	double	ray; // to add
+	double	ray;
+	double	face_angle;
 	double	len_ray;
 	double	angle;
 	char	*no_path;

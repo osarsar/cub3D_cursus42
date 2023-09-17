@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/16 02:06:40 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/17 00:54:51 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	put_pixel_to_image(t_ply *data, int i, int j)
 		my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
 		if (data->p_x == 0 && data->p_y == 0)
 		{
-			data->p_x = i + (80 / 2);
-			data->p_y = j + (80 / 2);
+			data->p_x = i + (NUM_PIXELS / 2);
+			data->p_y = j + (NUM_PIXELS / 2);
 		}
 	}
 }
@@ -62,22 +62,22 @@ void	creat_map_line(t_ply *data)
 			i++;
 		}
 		data->y++;
-		data->nb_x += 80;
+		data->nb_x += NUM_PIXELS;
 	}
 }
 
 int	creat_map(t_ply *data)
 {
 	data->x = 0;
-	data->nb_y = 80;
+	data->nb_y = NUM_PIXELS;
 	data->start_j = 0;
 	while (data->map[data->x])
 	{
 		data->y = 0;
-		data->nb_x = 80;
+		data->nb_x = NUM_PIXELS;
 		creat_map_line(data);
-		data->nb_y += 80;
-		data->start_j += 80;
+		data->nb_y += NUM_PIXELS;
+		data->start_j += NUM_PIXELS;
 		data->x++;
 	}
 	put_player(data);
