@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 07:36:23 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/18 03:41:38 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,19 @@ void	take_distance(t_ply *data)
 	y = (data->p_y - data->vy_wall) * (data->p_y - data->vy_wall);
 	data->v_distance = sqrt(x + y);
 	if (data->h_distance <= data->v_distance)
+	{
 		data->len_ray = data->h_distance;
+		data->x_wall = data->hx_wall;
+		data->y_wall = data->hy_wall;
+		data->check_h_v = 0;
+	}
 	else
+	{
 		data->len_ray = data->v_distance;
+		data->x_wall = data->vx_wall;
+		data->y_wall = data->vy_wall;
+		data->check_h_v = 1;
+	}
 	if (data->len_ray == 0)
 		data->len_ray = 1;
 }

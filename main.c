@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 23:28:44 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/18 01:53:01 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int	main(int ac, char **av)
 	init_data(data, ac, av);
 	pars(data, ac, av);
 	data->mlx = mlx_init();
+	ft_texture(data);
 	data->win = mlx_new_window(data->mlx, data->width_f_wall, data->height_f_wall, "3D_game");
 	data->mydata->img = mlx_new_image(data->mlx, data->width_f_wall + 1, data->height_f_wall + 1);
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 

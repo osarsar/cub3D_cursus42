@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 22:33:18 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/18 04:17:51 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define DOWN 1
 # define RIGHT 2
 # define LEFT 0
+typedef struct s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_img;
+
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -36,6 +44,7 @@ typedef struct s_data {
 
 typedef struct s_ply
 {
+	unsigned int	*tab_color;
 	int		height_f_wall;
 	int		width_f_wall;
 	char	**map;
@@ -90,6 +99,9 @@ typedef struct s_ply
 	double	vy_wall;
 	double	h_distance;
 	double	v_distance;
+	double	x_wall;
+	double	y_wall;
+	int		check_h_v;
 	t_data	*mydata;
 }t_ply;
 
@@ -166,5 +178,6 @@ int			ft_atoi_trois(void);
 
 //-----------------------------------------------------> textures.c
 void		ft_texture(t_ply	*data);
+int			to_rgb(int r, int g, int b);
 
 #endif
