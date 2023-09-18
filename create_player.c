@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 22:41:47 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/18 23:48:02 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,55 +52,14 @@ void	padding(t_ply *data)
 
 int	get_ofset_colomn(t_ply *data)
 {
-	int	x = 0;
+	int	x;
 
+	x = 0;
 	if (data->check_h_v == 0)
-		x = (data->x_wall/80 - (int)data->x_wall/80) * 80;
+		x = fmod(data->x_wall, NUM_PIXELS);
 	else if (data->check_h_v == 1)
-		x = (data->y_wall/80 - (int)data->y_wall/80) * 80;
-	// printf("data->check_h_v = %d\n", data->check_h_v);
-	// printf("data->x_wall = %f\n", data->y_wall);
-	// printf("data->y_wall = %d\n", (int)data->y_wall);
-	// printf("x = %d\n", x);
+		x = fmod(data->y_wall, NUM_PIXELS);
 	return (x);
-}
-
-void draw_map_3d(t_ply *data, int colomn)
-{
-	int 	wall_height;
-	int 	start_wall;
-	int 	end_wall;
-	int 	line;
-	int		x;
-	int		y;
-	int		color;
-
-	// wall_height = (data->width_f_wall * NUM_PIXELS) / (data->len_ray * cos(data->fov));//(data->height_of_win * NUM_PIXELS)
-	wall_height = (data->width_f_wall * NUM_PIXELS) / (data->len_ray);//(data->height_of_win * NUM_PIXELS)
-	// wall_height = wall_height / data->len_ray * cos(data->fov);//(data->height_of_win * NUM_PIXELS)
-	// wall_height = wall_height * ((data->width_f_wall / 2) * tan(deg_to_rad(60) / 2));//(data->height_of_win * NUM_PIXELS)
-	start_wall = (data->height_f_wall / 2) - (wall_height / 2);
-	x = get_ofset_colomn(data);
-	if (start_wall <= 0)
-		start_wall = 0;
-	end_wall = (data->height_f_wall / 2) + (wall_height / 2);
-	if (end_wall >= data->height_f_wall)
-		end_wall = data->height_f_wall;
-	line = 0;
-	while (line < data->height_f_wall)
-	{
-		if (line < start_wall)
-			color = to_rgb(data->c_1, data->c_2, data->c_3);
-		else if ((line >= start_wall) && (line <= end_wall))
-		{
-			y = (line - start_wall) * (NUM_PIXELS / data->height_f_wall);
-			color = data->tab_color[(NUM_PIXELS * y) + x];
-		}
-		else if (line > end_wall)
-			color = to_rgb(data->f_1, data->f_2, data->f_3);
-		my_mlx_pixel_put(data->mydata, colomn, line, color);
-		line++;
-	}
 }
 
 void	fov_player(t_ply *data)
@@ -114,9 +73,9 @@ void	fov_player(t_ply *data)
 	colomn = 0;
 	rad = 0;
 	rad = init_rad(data, rad);
-	while (colomn <= data->width_f_wall)
+	while (colomn <= data->width_of_win)
 	{
-		//draw_view(data);
+		draw_view(data);
 		init_angle_2pi(data);
 		view = check_view(data);
 		first_hori_verti(data);
@@ -125,8 +84,7 @@ void	fov_player(t_ply *data)
 		hori_wall_cord(data, view);
 		verti_wall_cord(data, view);
 		take_distance(data);
-		//push_rays(data);
-		data->fov += rad / data->width_f_wall;
+		data->fov += rad / data->width_of_win;
 		draw_map_3d(data, colomn);
 		colomn++;
 	}

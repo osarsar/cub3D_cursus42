@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 22:32:38 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/18 23:44:01 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ double	deg_to_rad(double deg)
 	return (deg * (M_PI / 180));
 }
 
-
 void	push_rays(t_ply *data)
 {
 	int	i;
@@ -57,105 +56,12 @@ void	push_rays(t_ply *data)
 	}
 }
 
-//123 left
-//124 right
-int	move_player_2(t_ply *data, int key)
-{
-	int		x;
-	int		y;
-	int		x_tmp;
-	int		y_tmp;
-	char 	*view;
-
-	x_tmp = data->p_x;
-	y_tmp = data->p_y;
-	view = check_view_player(data);
-	//new position x and y
-	printf("key = %d\n", key);
-	if (key == UP)
-	{
-		if (!ft_strcmp(view, "up_right"))
-		{
-			data->p_x += cos(M_PI - data->face_rad) * data->speed;
-			data->p_y -= sin(M_PI - data->face_rad) * data->speed;
-		}
-		if (!ft_strcmp(view, "up_left"))
-		{
-			data->p_x += cos(M_PI - data->face_rad) * data->speed;
-			data->p_y -= sin(M_PI - data->face_rad) * data->speed;
-		}
-		if (!ft_strcmp(view, "down_right"))
-		{
-			data->p_x += cos(data->face_rad - M_PI) * data->speed;
-			data->p_y += sin(data->face_rad - M_PI) * data->speed;
-		}
-		if (!ft_strcmp(view, "down_left"))
-		{
-			data->p_x += cos(data->face_rad - M_PI) * data->speed;
-			data->p_y += sin(data->face_rad - M_PI) * data->speed;
-		}
-	}
-	else if (key == DOWN)
-	{
-		if (!ft_strcmp(view, "up_right"))
-		{
-			data->p_x += cos(data->face_rad) * data->speed;
-			data->p_y += sin(data->face_rad) * data->speed;
-		}
-		if (!ft_strcmp(view, "up_left"))
-		{
-			data->p_x += cos(data->face_rad) * data->speed;
-			data->p_y += sin(data->face_rad) * data->speed;
-		}
-		if (!ft_strcmp(view, "down_right"))
-		{
-			data->p_x -= cos(data->face_rad - M_PI) * data->speed;
-			data->p_y -= sin(data->face_rad - M_PI) * data->speed;
-		}
-		if (!ft_strcmp(view, "down_left"))
-		{
-			data->p_x -= M_PI + cos(data->face_rad - M_PI) * data->speed;
-			data->p_y -= M_PI + sin(data->face_rad - M_PI) * data->speed;
-		}
-	}
-	else if (key == RIGHT)
-	{
-		data->p_x -= cos(data->face_rad + (M_PI * 0.5)) * data->speed;
-		data->p_y -= sin(data->face_rad + (M_PI * 0.5)) * data->speed;
-	}
-	else if (key == LEFT)
-	{
-		data->p_x += cos(data->face_rad + (M_PI * 0.5)) * data->speed;
-		data->p_y += sin(data->face_rad + (M_PI * 0.5)) * data->speed;
-	}
-	// check wall
-	x = (int)(data->p_x / NUM_PIXELS);
-	y = (int)(data->p_y / NUM_PIXELS);
-	printf("data->p_y %d\n", y);
-	if (x < 0 || y < 0
-		|| x >= ((data->width_f_wall / NUM_PIXELS) - 1) || y >= ((data->height_f_wall / NUM_PIXELS) - 1)
-		|| data->map[y][x] == '1')
-	{
-		printf("-->::\n\n");
-		data->p_x = x_tmp;
-		data->p_y = y_tmp;
-		printf("data->map[y][x] = %c\n", data->map[y][x]);
-	}
-	return (0);
-}
-//13 - up
-//1 - down
-//2 - right
-//0 - left
 int	move_player(int key, t_ply *data)
 {
 	if (key == 53)
 		exit(1);
 	else if (key == RIGHT)
-	{
-		printf("RIGHT\n");
 		move_player_2(data, key);
-	}
 	else if (key == LEFT)
 	{
 		printf("LEFT\n");
@@ -195,8 +101,10 @@ int	main(int ac, char **av)
 	pars(data, ac, av);
 	data->mlx = mlx_init();
 	ft_texture(data);
-	data->win = mlx_new_window(data->mlx, data->width_f_wall, data->height_f_wall, "3D_game");
-	data->mydata->img = mlx_new_image(data->mlx, data->width_f_wall + 1, data->height_f_wall + 1);
+	data->win = mlx_new_window(data->mlx, data->width_of_win,
+			data->height_of_win, "3D_game");
+	data->mydata->img = mlx_new_image(data->mlx,
+			data->width_of_win + 1, data->height_of_win + 1);
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
 			&data->mydata->bits_per_pixel, 
 			&data->mydata->line_length, &data->mydata->endian);

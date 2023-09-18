@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 04:17:51 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/18 23:42:12 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@
 # include <mlx.h>
 # include <math.h>
 
-# define NUM_PIXELS 80
+# define NUM_PIXELS 64
 # define UP 13
 # define DOWN 1
 # define RIGHT 2
 # define LEFT 0
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
@@ -45,64 +46,64 @@ typedef struct s_data {
 typedef struct s_ply
 {
 	unsigned int	*tab_color;
-	int		height_f_wall;
-	int		width_f_wall;
-	char	**map;
-	char	**av;
-	int		ac;
-	void	*mlx;
-	void	*win;
-	int		x;
-	int		y;
-	int		p_x;
-	int		p_y;
-	int		start_x;
-	int		start_y;
-	int		start_j;
-	int		end_x;
-	int		end_y;
-	int		nb_x;
-	int		nb_y;
-	int		flag;
-	int		radius;
-	int		nb_rays;
-	int		speed;
-	double	rad;
-	double	fov;
-	double	face_angle;
-	double	len_ray;
-	double	face_rad;
-	double	angle;
-	char	*no_path;
-	char	*so_path;
-	char	*we_path;
-	char	*ea_path;
-	int		f_1;
-	int		f_2;
-	int		f_3;
-	int		c_1;
-	int		c_2;
-	int		c_3;
-	double	first_hx;
-	double	first_hy;
-	double	first_vx;
-	double	first_vy;
-	double	h_dx;
-	double	h_dy;
-	double	v_dx;
-	double	v_dy;
-	double	xstep;
-	double	ystep;
-	double	hx_wall;
-	double	hy_wall;
-	double	vx_wall;
-	double	vy_wall;
-	double	h_distance;
-	double	v_distance;
-	double	x_wall;
-	double	y_wall;
-	int		check_h_v;
-	t_data	*mydata;
+	int				height_of_win;
+	int				width_of_win;
+	char			**map;
+	char			**av;
+	int				ac;
+	void			*mlx;
+	void			*win;
+	int				x;
+	int				y;
+	int				p_x;
+	int				p_y;
+	int				start_x;
+	int				start_y;
+	int				start_j;
+	int				end_x;
+	int				end_y;
+	int				nb_x;
+	int				nb_y;
+	int				flag;
+	int				radius;
+	int				nb_rays;
+	int				speed;
+	double			rad;
+	double			fov;
+	double			face_angle;
+	double			len_ray;
+	double			face_rad;
+	double			angle;
+	char			*no_path;
+	char			*so_path;
+	char			*we_path;
+	char			*ea_path;
+	int				f_1;
+	int				f_2;
+	int				f_3;
+	int				c_1;
+	int				c_2;
+	int				c_3;
+	double			first_hx;
+	double			first_hy;
+	double			first_vx;
+	double			first_vy;
+	double			h_dx;
+	double			h_dy;
+	double			v_dx;
+	double			v_dy;
+	double			xstep;
+	double			ystep;
+	double			hx_wall;
+	double			hy_wall;
+	double			vx_wall;
+	double			vy_wall;
+	double			h_distance;
+	double			v_distance;
+	double			x_wall;
+	double			y_wall;
+	int				check_h_v;
+	t_data			*mydata;
 }t_ply;
 
 //-----------------------------------------------------> osarsar
@@ -130,7 +131,7 @@ int			move_player(int key, t_ply *data);
 char		*check_view_player(t_ply *data);
 void		draw_view(t_ply *data);
 void		view_to_start(t_ply *data);
-double	    init_rad(t_ply *data, double rad);
+double		init_rad(t_ply *data, double rad);
 void		init_angle_2pi(t_ply *data);
 
 //-----------------------------------------------------> stemsama
@@ -179,5 +180,10 @@ int			ft_atoi_trois(void);
 //-----------------------------------------------------> textures.c
 void		ft_texture(t_ply	*data);
 int			to_rgb(int r, int g, int b);
+
+//-----------------------------------------------------> textures.c
+void		draw_map_3d(t_ply *data, int colomn);
+int			get_ofset_colomn(t_ply *data);
+int			move_player_2(t_ply *data, int key);
 
 #endif

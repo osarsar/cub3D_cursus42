@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 22:31:53 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/18 23:17:04 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	verti_wall_cord(t_ply *data, char *view)
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "down_right"))
 		data->xstep--;
 	while (data->xstep > 0 && data->ystep > 0
-		&& data->ystep < data->height_f_wall 
-		&& data->xstep < data->width_f_wall)
+		&& data->ystep < data->height_of_win
+		&& data->xstep < data->width_of_win)
 	{
 		x = data->ystep / NUM_PIXELS;
 		y = data->xstep / NUM_PIXELS;
@@ -82,8 +82,8 @@ void	hori_wall_cord(t_ply *data, char *view)
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "up_right"))
 		data->ystep--;
 	while (data->xstep > 0 && data->ystep > 0
-		&& data->ystep < data->height_f_wall 
-		&& data->xstep < data->width_f_wall)
+		&& data->ystep < data->height_of_win 
+		&& data->xstep < data->width_of_win)
 	{
 		x = data->ystep / NUM_PIXELS;
 		y = data->xstep / NUM_PIXELS;

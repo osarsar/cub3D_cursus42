@@ -1,2 +1,2 @@
 # cub3D_cursus42
-	+= wall
+	Move player : incliner
