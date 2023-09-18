@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 03:41:38 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:31:53 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,52 +48,22 @@ char	*check_view(t_ply *data)
 	}
 }
 
-void	modify_depend_view(t_ply *data, char *view)
-{
-	if (!ft_strcmp(view, "up_left"))
-	{
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
-		data->h_dx *= -1;
-		data->h_dy *= -1;
-		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->fov));
-		data->v_dy *= -1;
-		data->v_dx *= -1;
-	}
-	else if (!ft_strcmp(view, "up_right"))
-	{
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
-		data->h_dx *= -1;
-		data->h_dy *= -1;
-		data->first_vx += NUM_PIXELS;
-		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->fov));
-	}
-	else if (!ft_strcmp(view, "down_left"))
-	{
-		data->first_hy += NUM_PIXELS;
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
-		data->first_vx += NUM_PIXELS;
-		data->first_vy = data->p_y - ((data->p_x - data->first_vx) * tan(data->fov));
-	}
-	else if (!ft_strcmp(view, "down_right"))
-	{
-		data->first_hy += NUM_PIXELS;
-		data->first_hx = data->p_x - ((data->p_y - data->first_hy) / tan(data->fov));
-		data->first_vy = data->p_y + ((data->first_vx - data->p_x) * tan(data->fov));
-		data->v_dy *= -1;
-		data->v_dx *= -1;
-	}
-}
-
 void	verti_wall_cord(t_ply *data, char *view)
 {
+	int	x;
+	int	y;
+
 	data->xstep = data->first_vx;
 	data->ystep = data->first_vy;
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "down_right"))
 		data->xstep--;
 	while (data->xstep > 0 && data->ystep > 0
-		&& data->ystep < data->height_f_wall && data->xstep < data->width_f_wall)
+		&& data->ystep < data->height_f_wall 
+		&& data->xstep < data->width_f_wall)
 	{
-		if (data->map[((int)data->ystep / NUM_PIXELS)][((int)data->xstep / NUM_PIXELS)] == '1')
+		x = data->ystep / NUM_PIXELS;
+		y = data->xstep / NUM_PIXELS;
+		if (data->map[x][y] == '1')
 			break ;
 		data->xstep += data->v_dx;
 		data->ystep += data->v_dy;
@@ -104,14 +74,20 @@ void	verti_wall_cord(t_ply *data, char *view)
 
 void	hori_wall_cord(t_ply *data, char *view)
 {
+	int	x;
+	int	y;
+
 	data->xstep = data->first_hx;
 	data->ystep = data->first_hy;
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "up_right"))
 		data->ystep--;
 	while (data->xstep > 0 && data->ystep > 0
-		&& data->ystep < data->height_f_wall && data->xstep < data->width_f_wall)
+		&& data->ystep < data->height_f_wall 
+		&& data->xstep < data->width_f_wall)
 	{
-		if (data->map[(int)(data->ystep) / NUM_PIXELS][(int)(data->xstep) / NUM_PIXELS] == '1')
+		x = data->ystep / NUM_PIXELS;
+		y = data->xstep / NUM_PIXELS;
+		if (data->map[x][y] == '1')
 			break ;
 		data->xstep += data->h_dx;
 		data->ystep += data->h_dy;
@@ -147,20 +123,4 @@ void	take_distance(t_ply *data)
 	}
 	if (data->len_ray == 0)
 		data->len_ray = 1;
-}
-
-void	push_rays(t_ply *data)
-{
-	int	i;
-	int	ox;
-	int	oy;
-
-	i = 0;
-	while (i <= data->len_ray)
-	{
-		ox = data->p_x - (i * cos(data->fov));
-		oy = data->p_y - (i * sin(data->fov));
-		my_mlx_pixel_put(data->mydata, ox, oy, 0x00FF0000);
-		i++;
-	}
 }

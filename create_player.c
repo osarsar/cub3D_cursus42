@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 05:42:51 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:41:47 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	padding(t_ply *data)
 	data->v_dy = data->v_dx * tan(data->fov);
 }
 
-int get_ofset_colomn(t_ply *data)
+int	get_ofset_colomn(t_ply *data)
 {
 	int	x = 0;
 
@@ -116,7 +116,7 @@ void	fov_player(t_ply *data)
 	rad = init_rad(data, rad);
 	while (colomn <= data->width_f_wall)
 	{
-		draw_view(data);
+		//draw_view(data);
 		init_angle_2pi(data);
 		view = check_view(data);
 		first_hori_verti(data);
@@ -125,7 +125,7 @@ void	fov_player(t_ply *data)
 		hori_wall_cord(data, view);
 		verti_wall_cord(data, view);
 		take_distance(data);
-		push_rays(data);
+		//push_rays(data);
 		data->fov += rad / data->width_f_wall;
 		draw_map_3d(data, colomn);
 		colomn++;

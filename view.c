@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 08:42:48 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/17 08:57:11 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/18 21:40:01 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,20 @@ void	init_angle_2pi(t_ply *data)
 
 void	draw_view(t_ply *data)
 {
-	int j = 0;
+	int	j;
+	int	ox;
+	int	oy;
+
+	j = 0;
 	while (j <= 50)
 	{
-		int ox = data->p_x - (j * cos(data->face_rad));
-		int oy = data->p_y - (j * sin(data->face_rad));
+		ox = data->p_x - (j * cos(data->face_rad));
+		oy = data->p_y - (j * sin(data->face_rad));
 		my_mlx_pixel_put(data->mydata, ox, oy, 0x0000FF);
 		j++;
-	}	
+	}
 }
+
 void	view_to_start(t_ply *data)
 {
 	if (data->map[data->x][data->y] == 'N')
@@ -51,7 +56,6 @@ void	view_to_start(t_ply *data)
 
 double	init_rad(t_ply *data, double rad)
 {
-
 	data->face_rad = deg_to_rad(data->face_angle);
 	init_angle(data);
 	rad = deg_to_rad(data->angle);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 01:53:01 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:32:38 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ double	deg_to_rad(double deg)
 {
 	return (deg * (M_PI / 180));
 }
+
+
+void	push_rays(t_ply *data)
+{
+	int	i;
+	int	ox;
+	int	oy;
+
+	i = 0;
+	while (i <= data->len_ray)
+	{
+		ox = data->p_x - (i * cos(data->fov));
+		oy = data->p_y - (i * sin(data->fov));
+		my_mlx_pixel_put(data->mydata, ox, oy, 0x00FF0000);
+		i++;
+	}
+}
+
 //123 left
 //124 right
 int	move_player_2(t_ply *data, int key)
