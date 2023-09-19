@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 05:09:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/18 23:22:06 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:06:13 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	check_number(char **list_color, int check, t_ply *data)
 	i = 0;
 	while (list_color[i])
 	{
-		list_color[i] = ft_strtrim(list_color[i], " \t");
+		list_color[i] = ft_strtrim_free(list_color[i], " \t");
 		if (ft_strchr(list_color[i], ' ') || ft_strchr(list_color[i], '\t'))
 			affiche_er(2);
 		if (ft_atoi(list_color[i]) > 255 || ft_atoi(list_color[i]) < 0)
@@ -55,6 +55,7 @@ void	check_number(char **list_color, int check, t_ply *data)
 		data->c_2 = ft_atoi(list_color[1]);
 		data->c_3 = ft_atoi(list_color[2]);
 	}
+	free_color(list_color, i);
 }
 
 void	read_config_f_c(char *line, t_ply *data)
@@ -75,6 +76,8 @@ void	read_config_f_c(char *line, t_ply *data)
 		affiche_er(1);
 	check_number(list_color, check, data);
 	printf("2 config c_f :%s\n", line);
+	free(line);
+	line = NULL;
 }
 
 //line = read_config(fd, data); ->| now line = first line of map
@@ -87,11 +90,12 @@ void	get_map(int fd, t_ply *data)
 	line = read_config(fd, data);
 	if (!data->no_path || !data->so_path || !data->we_path || !data->ea_path)
 		affiche_er(1);
-	line = ft_strtrim(line, " \t");
+	line = ft_strtrim_free(line, " \t");
 	while (!ft_strcmp(line, "\n"))
 	{
+		free(line);
 		line = get_next_line(fd);
-		line = ft_strtrim(line, " \t");
+		line = ft_strtrim_free(line, " \t");
 	}
 	while (line != NULL)
 	{
@@ -103,7 +107,7 @@ void	get_map(int fd, t_ply *data)
 	check_char_in_map(tmp_line);
 	data->map = ft_split(tmp_line, '\n');
 	data->map = map_to_rectangle(data->map);
-	check_map_close(data->map);
+	free(tmp_line);
 }
 
 void	pars(t_ply	*data, int ac, char **av)
@@ -129,6 +133,8 @@ void	pars(t_ply	*data, int ac, char **av)
 	data->c_2 = 0;
 	data->c_3 = 0;
 	get_map(fd, data);
+	check_map_close(data->map);
+	close(fd);
 	data->height_of_win = size_map_line(data->map) * NUM_PIXELS;
 	data->width_of_win = max_size_col(data->map) * NUM_PIXELS;
 }

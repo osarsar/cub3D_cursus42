@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 07:45:07 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/14 08:55:48 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/19 18:41:27 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*read_config(int fd, t_ply *data)
 	check = 0;
 	while ((check != 6) && line != NULL)
 	{
-		line = ft_strtrim(line, " \t");
+		line = ft_strtrim_free(line, " \t");
 		if (line && !ft_strcmp(line, "\n"))
 		{
 			free(line);
@@ -48,8 +48,9 @@ char	*read_config(int fd, t_ply *data)
 			continue ;
 		}
 		read_config_1(line, data);
-		check++;
+		free(line);
 		line = get_next_line(fd);
+		check++;
 	}
 	return (line);
 }

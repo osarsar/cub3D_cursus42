@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/19 11:54:34 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:07:05 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ void		read_config_path(char *line, t_ply *data);
 
 //-----------------------------------------------------> libft1.c
 char		*ft_strtrim(char *s1, char *set);
+char		*ft_strtrim_free(char *s1, char *set);
 
 //-----------------------------------------------------> libft2.c
 int			ft_strncmp(const char *s1, const char *s2, size_t len);
@@ -202,5 +203,6 @@ int			to_rgb(int r, int g, int b);
 //-----------------------------------------------------> norm_1.c
 void		draw_map_3d(t_ply *data, int colomn);
 int			move_player_2(t_ply *data, int key);
+void		free_color(char **list_color, int i);
 
 #endif

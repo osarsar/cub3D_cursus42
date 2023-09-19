@@ -6,11 +6,19 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:31:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/18 23:42:00 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:07:30 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	free_color(char **list_color, int i)
+{
+	free(list_color[i - 1]);
+	free(list_color[i - 2]);
+	free(list_color[i - 3]);
+	free(list_color);
+}
 
 void	draw_map_3d(t_ply *data, int colomn)
 {
@@ -115,14 +123,15 @@ int	move_player_2(t_ply *data, int key)
 		data->p_x += cos(data->face_rad + (M_PI * 0.5)) * data->speed;
 		data->p_y += sin(data->face_rad + (M_PI * 0.5)) * data->speed;
 	}
-	// check wall
 	x = (int)(data->p_x / NUM_PIXELS);
 	y = (int)(data->p_y / NUM_PIXELS);
 	printf("data->p_y %d\n", y);
-	if (x < 0 || y < 0
-		|| x >= ((data->width_of_win / NUM_PIXELS) - 1)
-		|| y >= ((data->height_of_win / NUM_PIXELS) - 1)
-		|| data->map[y][x] == '1')
+	if ((x < 0 || y < 0
+			|| x >= ((data->width_of_win / NUM_PIXELS) - 1)
+			|| y >= ((data->height_of_win / NUM_PIXELS) - 1)
+			|| data->map[y][x] == '1')
+			|| (data->map[y][(int)(x_tmp / NUM_PIXELS)] == '1'
+		&& data->map[(int)(y_tmp / NUM_PIXELS)][x] == '1'))
 	{
 		printf("-->::\n\n");
 		data->p_x = x_tmp;

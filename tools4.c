@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 05:32:46 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/14 08:17:11 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:06:01 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,12 @@ void	check_map_close(char **map)
 
 char	*read_config_path_2(char *path)
 {
-	path += 2;
-	path = ft_strtrim(path, " \t\n");
-	if (ft_strchr(path, ' ') || ft_strchr(path, '\t'))
+	char	*return_value;
+
+	return_value = ft_strdup(path + 2);
+	free(path);
+	return_value = ft_strtrim_free(return_value, " \t\n");
+	if (ft_strchr(return_value, ' ') || ft_strchr(return_value, '\t'))
 		affiche_er(1);
-	return (path);
+	return (return_value);
 }
