@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 23:42:12 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:54:34 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,35 +106,46 @@ typedef struct s_ply
 	t_data			*mydata;
 }t_ply;
 
-//-----------------------------------------------------> osarsar
+//-----------------------------------------------------> create_map.c
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-char		**ft_split(char const *s, char c);
-void		*free_f(char **str, int i);
-char		*fill_str(char *lil_str, const char *s, char c);
-int			word_size(const char *s, char c);
-int			words_numb(const char *s, char c);
-void		init_data(t_ply *data, int ac, char **av);
-void		put_image(t_ply *data);
-int			put_image_to_letter(t_ply *data);
+void		put_pixel_to_image(t_ply *data, int i, int j);
+void		creat_map_line(t_ply *data);
 int			creat_map(t_ply *data);
+
+//-----------------------------------------------------> create_player.c
 void		put_player(t_ply *data);
-void		fov_player(t_ply *data);
-double		deg_to_rad(double deg);
 void		first_hori_verti(t_ply *data);
-char		*check_view(t_ply *data);
+void		padding(t_ply *data);
+int			get_ofset_colomn(t_ply *data);
+void		fov_player(t_ply *data);
+
+//-----------------------------------------------------> create_map.c
+void		raycast_up_left(t_ply *data);
+void		raycast_up_right(t_ply *data);
+void		raycast_down_left(t_ply *data);
+void		raycast_down_right(t_ply *data);
 void		modify_depend_view(t_ply *data, char *view);
-void		hori_wall_cord(t_ply *data, char *view);
+
+//-----------------------------------------------------> player_view.c
+char		*check_view_player(t_ply *data);
+char		*check_view(t_ply *data);
 void		verti_wall_cord(t_ply *data, char *view);
+void		hori_wall_cord(t_ply *data, char *view);
 void		take_distance(t_ply *data);
+
+//-----------------------------------------------------> main.c
+void		init_data(t_ply *data, int ac, char **av);
+double		deg_to_rad(double deg);
 void		push_rays(t_ply *data);
 int			move_player(int key, t_ply *data);
-char		*check_view_player(t_ply *data);
+
+//-----------------------------------------------------> view.c
+void		init_angle(t_ply *data);
+void		init_angle_2pi(t_ply *data);
 void		draw_view(t_ply *data);
 void		view_to_start(t_ply *data);
 double		init_rad(t_ply *data, double rad);
-void		init_angle_2pi(t_ply *data);
 
-//-----------------------------------------------------> stemsama
 //-----------------------------------------------------> tols1.c
 void		pars(t_ply	*data, int ac, char **av);
 void		get_map(int fd, t_ply *data);
@@ -177,13 +188,19 @@ int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(char *str);
 int			ft_atoi_trois(void);
 
+//-----------------------------------------------------> libft3.c
+char		**ft_split(char const *s, char c);
+void		*free_f(char **str, int i);
+char		*fill_str(char *lil_str, const char *s, char c);
+int			word_size(const char *s, char c);
+int			words_numb(const char *s, char c);
+
 //-----------------------------------------------------> textures.c
 void		ft_texture(t_ply	*data);
 int			to_rgb(int r, int g, int b);
 
-//-----------------------------------------------------> textures.c
+//-----------------------------------------------------> norm_1.c
 void		draw_map_3d(t_ply *data, int colomn);
-int			get_ofset_colomn(t_ply *data);
 int			move_player_2(t_ply *data, int key);
 
 #endif
