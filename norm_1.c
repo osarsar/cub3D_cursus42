@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:31:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/19 19:07:30 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/20 01:17:42 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	draw_map_3d(t_ply *data, int colomn)
 			x_y_cl[2] = to_rgb(data->c_1, data->c_2, data->c_3);
 		else if ((line >= start_wall) && (line <= end_wall))
 		{
-			x_y_cl[1] = (line - start_wall);
+			x_y_cl[1] = line + (wall_height / 2) - (data->height_of_win / 2);
 			x_y_cl[1] = x_y_cl[1] * ((double)NUM_PIXELS / wall_height);
 			x_y_cl[2] = data->tab_color[(NUM_PIXELS * x_y_cl[1]) + x_y_cl[0]];
 		}
@@ -126,6 +126,15 @@ int	move_player_2(t_ply *data, int key)
 	x = (int)(data->p_x / NUM_PIXELS);
 	y = (int)(data->p_y / NUM_PIXELS);
 	printf("data->p_y %d\n", y);
+	if (data->map[(int)((data->p_y - 7) / NUM_PIXELS)][x] == '1'
+		|| data->map[(int)((data->p_y + 7) / NUM_PIXELS)][x] == '1'
+		|| data->map[y][(int)((data->p_x - 10) / NUM_PIXELS)] == '1'
+		|| data->map[y][(int)((data->p_x + 8) / NUM_PIXELS)] == '1')
+	{
+		data->p_x = x_tmp;
+		data->p_y = y_tmp;
+		printf("data->map[y][x] = %c\n", data->map[y][x]);
+	}
 	if ((x < 0 || y < 0
 			|| x >= ((data->width_of_win / NUM_PIXELS) - 1)
 			|| y >= ((data->height_of_win / NUM_PIXELS) - 1)

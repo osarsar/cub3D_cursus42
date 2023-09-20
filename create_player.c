@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/19 18:51:46 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/20 01:22:18 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	get_ofset_colomn(t_ply *data)
 		x = fmod(data->x_wall, NUM_PIXELS);
 	else if (data->check_h_v == 1)
 		x = fmod(data->y_wall, NUM_PIXELS);
+	// if (data->check_h_v == 0 && (!ft_strcmp(view, "up_right") || !ft_strcmp(view, "down_right")))
 	return (x);
 }
 
@@ -85,7 +86,7 @@ void	fov_player(t_ply *data)
 		verti_wall_cord(data, view);
 		take_distance(data);
 		data->fov += rad / data->width_of_win;
-		// draw_map_3d(data, colomn);
+		draw_map_3d(data, colomn);
 		colomn++;
 	}
 }
