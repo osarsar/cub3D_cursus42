@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:31:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/20 18:38:54 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:26:03 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	draw_map_3d(t_ply *data, int colomn)
 	if (end_wall >= data->height_of_win)
 		end_wall = data->height_of_win;
 	line = 0;
-	while (line < data->height_of_win)
+	while (line < data->height_of_win - 1)
 	{
 		if (line < start_wall)
 			x_y_cl[2] = to_rgb(data->c_1, data->c_2, data->c_3);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 05:09:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/19 19:06:13 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/21 00:26:55 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,7 @@ void	pars(t_ply	*data, int ac, char **av)
 	get_map(fd, data);
 	check_map_close(data->map);
 	close(fd);
-	data->height_of_win = size_map_line(data->map) * NUM_PIXELS;
-	data->width_of_win = max_size_col(data->map) * NUM_PIXELS;
+	data->height_of_win = 720;
+	data->width_of_win = 1080;
+	printf("height==%d \t width == %d\n", data->height_of_win,data->width_of_win);
 }
