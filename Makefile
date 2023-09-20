@@ -6,7 +6,7 @@
 #    By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/18 05:17:54 by stemsama          #+#    #+#              #
-#    Updated: 2023/09/19 19:08:32 by stemsama         ###   ########.fr        #
+#    Updated: 2023/09/20 18:37:55 by stemsama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC = main.c get_next_line.c get_next_line_utils.c \
 		tools1.c tools2.c tools3.c tools4.c tools5.c\
 		create_map.c create_player.c player_view.c	view.c raycast.c\
 		textures.c \
-		norm_1.c \
+		norm_1.c norm_2.c \
 
 OBJECT = $(SRC:.c=.o)
 

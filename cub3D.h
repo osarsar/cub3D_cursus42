@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/19 19:07:05 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:42:33 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ typedef struct s_img {
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
+	int		width;
+	int		height;
 	int		endian;
+	unsigned int	*tab_color;
 }				t_img;
 
 typedef struct s_data {
@@ -45,7 +48,6 @@ typedef struct s_data {
 
 typedef struct s_ply
 {
-	unsigned int	*tab_color;
 	int				height_of_win;
 	int				width_of_win;
 	char			**map;
@@ -104,6 +106,12 @@ typedef struct s_ply
 	double			y_wall;
 	int				check_h_v;
 	t_data			*mydata;
+	t_img			*img;
+	t_img			*img_n;
+	t_img			*img_s;
+	t_img			*img_w;
+	t_img			*img_e;
+	t_img			*img_4[4];
 }t_ply;
 
 //-----------------------------------------------------> create_map.c
@@ -197,12 +205,15 @@ int			word_size(const char *s, char c);
 int			words_numb(const char *s, char c);
 
 //-----------------------------------------------------> textures.c
-void		ft_texture(t_ply	*data);
+t_img		*ft_texture(t_ply	*data, char	*path);
 int			to_rgb(int r, int g, int b);
 
 //-----------------------------------------------------> norm_1.c
 void		draw_map_3d(t_ply *data, int colomn);
 int			move_player_2(t_ply *data, int key);
 void		free_color(char **list_color, int i);
+
+/*-----------------------------------------------------> norm_2.c*/
+int			close_win(t_ply *data);
 
 #endif

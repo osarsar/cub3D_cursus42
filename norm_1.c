@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:31:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/20 01:17:42 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:38:54 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	draw_map_3d(t_ply *data, int colomn)
 		{
 			x_y_cl[1] = line + (wall_height / 2) - (data->height_of_win / 2);
 			x_y_cl[1] = x_y_cl[1] * ((double)NUM_PIXELS / wall_height);
-			x_y_cl[2] = data->tab_color[(NUM_PIXELS * x_y_cl[1]) + x_y_cl[0]];
+			x_y_cl[2] = data->img->tab_color[(NUM_PIXELS * x_y_cl[1]) + x_y_cl[0]];
 		}
 		else if (line > end_wall)
 			x_y_cl[2] = to_rgb(data->f_1, data->f_2, data->f_3);

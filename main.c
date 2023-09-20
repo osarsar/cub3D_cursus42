@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/19 19:01:03 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:44:40 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,22 @@ int	move_player(int key, t_ply *data)
 		move_player_2(data, key);
 	}
 	else if (key == 124)
+	{
+		// if (data->face_angle >= 360)
+		// 	data->face_angle -= 360;
+		// else if (data->face_angle <= 0)
+		// 	data->face_angle += 360;
+		// // printf("hamza : %f\n", data->face_angle);
 		data->face_angle += 5;
+	}
 	else if (key == 123)
+	{
+		// if (data->face_angle >= 360)
+		// 	data->face_angle -= 360;
+		// else if (data->face_angle <= 0)
+		// 	data->face_angle += 360;
 		data->face_angle -= 5;
+	}
 	return (0);
 }
 
@@ -100,7 +113,11 @@ int	main(int ac, char **av)
 	init_data(data, ac, av);
 	pars(data, ac, av);
 	data->mlx = mlx_init();
-	ft_texture(data);
+	data->img_n = ft_texture(data, data->no_path);
+	data->img_s = ft_texture(data, data->so_path);
+	data->img_w = ft_texture(data, data->we_path);
+	data->img_e = ft_texture(data, data->ea_path);
+	data->img = data->img_n;
 	data->win = mlx_new_window(data->mlx, data->width_of_win,
 			data->height_of_win, "3D_game");
 	data->mydata->img = mlx_new_image(data->mlx,
@@ -108,7 +125,10 @@ int	main(int ac, char **av)
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
 			&data->mydata->bits_per_pixel, 
 			&data->mydata->line_length, &data->mydata->endian);
-	mlx_loop_hook(data->mlx, &creat_map, data);
 	mlx_hook(data->win, 2, 0, &move_player, data);
+	mlx_hook(data->win, 17, 0, &close_win, data);
+	// mlx_hook(data->win, 2, 0, &is_pre, data);
+	// mlx_hook(data->win, 3, 0, &is_rel, data);
+	mlx_loop_hook(data->mlx, &creat_map, data);
 	mlx_loop(data->mlx);
 }
