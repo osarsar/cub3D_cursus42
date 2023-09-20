@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/20 18:44:40 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:39:29 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ int	main(int ac, char **av)
 	data->img_w = ft_texture(data, data->we_path);
 	data->img_e = ft_texture(data, data->ea_path);
 	data->img = data->img_n;
-	data->win = mlx_new_window(data->mlx, data->width_of_win,
-			data->height_of_win, "3D_game");
+	data->win = mlx_new_window(data->mlx, 1300,
+			1000, "3D_game");
 	data->mydata->img = mlx_new_image(data->mlx,
 			data->width_of_win + 1, data->height_of_win + 1);
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 

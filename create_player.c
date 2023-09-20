@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/20 18:48:39 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:28:36 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	fov_player(t_ply *data)
 		hori_wall_cord(data, view);
 		verti_wall_cord(data, view);
 		take_distance(data);
-		// push_rays(data);
+		push_rays(data);
 		data->fov += rad / data->width_of_win;
 		draw_map_3d(data, colomn);
 		colomn++;
