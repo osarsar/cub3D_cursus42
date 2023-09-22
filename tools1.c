@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 05:09:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/21 00:26:55 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/22 22:54:21 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,23 @@ void	check_comma(char *line)
 		affiche_er(1);
 }
 
+void	check_number_2(char **list_color, int i)
+{
+	int	j;
+
+	j = 0;
+	while (list_color[i][j])
+	{
+		if (!ft_isdigit(list_color[i][j]))
+			affiche_er(2);
+		j++;
+	}
+	if (ft_strchr(list_color[i], ' ') || ft_strchr(list_color[i], '\t'))
+		affiche_er(2);
+	if (ft_atoi(list_color[i]) > 255 || ft_atoi(list_color[i]) < 0)
+		affiche_er(1);
+}
+
 void	check_number(char **list_color, int check, t_ply *data)
 {
 	int	i;
@@ -37,10 +54,7 @@ void	check_number(char **list_color, int check, t_ply *data)
 	while (list_color[i])
 	{
 		list_color[i] = ft_strtrim_free(list_color[i], " \t");
-		if (ft_strchr(list_color[i], ' ') || ft_strchr(list_color[i], '\t'))
-			affiche_er(2);
-		if (ft_atoi(list_color[i]) > 255 || ft_atoi(list_color[i]) < 0)
-			affiche_er(1);
+		check_number_2(list_color, i);
 		i++;
 	}
 	if (check == 1)
@@ -75,7 +89,6 @@ void	read_config_f_c(char *line, t_ply *data)
 	if (!list_color[0] || !list_color[1] || !list_color[2])
 		affiche_er(1);
 	check_number(list_color, check, data);
-	printf("2 config c_f :%s\n", line);
 	free(line);
 	line = NULL;
 }
@@ -108,34 +121,4 @@ void	get_map(int fd, t_ply *data)
 	data->map = ft_split(tmp_line, '\n');
 	data->map = map_to_rectangle(data->map);
 	free(tmp_line);
-}
-
-void	pars(t_ply	*data, int ac, char **av)
-{
-	int	fd;
-
-	if (ac != 2)
-		affiche_er(2);
-	init_data(data, ac, av);
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
-		affiche_er(2);
-	if (ft_strcmp(ft_strchr(av[1], '.'), ".cub"))
-		affiche_er(2);
-	data->no_path = NULL;
-	data->so_path = NULL;
-	data->we_path = NULL;
-	data->ea_path = NULL;
-	data->f_1 = 0;
-	data->f_2 = 0;
-	data->f_3 = 0;
-	data->c_1 = 0;
-	data->c_2 = 0;
-	data->c_3 = 0;
-	get_map(fd, data);
-	check_map_close(data->map);
-	close(fd);
-	data->height_of_win = 720;
-	data->width_of_win = 1080;
-	printf("height==%d \t width == %d\n", data->height_of_win,data->width_of_win);
 }

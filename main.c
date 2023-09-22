@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/21 00:08:18 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/22 23:15:11 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,40 +63,23 @@ int	move_player(int key, t_ply *data)
 	else if (key == RIGHT)
 		move_player_2(data, key);
 	else if (key == LEFT)
-	{
-		printf("LEFT\n");
 		move_player_2(data, key);
-	}
 	else if (key == DOWN)
-	{
-		printf("DOWN\n");
 		move_player_2(data, key);
-	}
 	else if (key == UP)
-	{
-		printf("up\n");
 		move_player_2(data, key);
-	}
 	else if (key == 124)
-	{
-		// if (data->face_angle >= 360)
-		// 	data->face_angle -= 360;
-		// else if (data->face_angle <= 0)
-		// 	data->face_angle += 360;
-		// // printf("hamza : %f\n", data->face_angle);
 		data->face_angle += 5;
-	}
 	else if (key == 123)
-	{
-		// if (data->face_angle >= 360)
-		// 	data->face_angle -= 360;
-		// else if (data->face_angle <= 0)
-		// 	data->face_angle += 360;
 		data->face_angle -= 5;
-	}
 	return (0);
 }
 
+// void	f(void)
+// {
+// 	system("leaks cub3D");
+// }
+// atexit(f);
 int	main(int ac, char **av)
 {
 	t_ply	*data;
@@ -118,17 +101,6 @@ int	main(int ac, char **av)
 	data->img_w = ft_texture(data, data->we_path);
 	data->img_e = ft_texture(data, data->ea_path);
 	data->img = data->img_n;
-	data->win = mlx_new_window(data->mlx, data->width_of_win,
-			data->height_of_win, "3D_game");
-	data->mydata->img = mlx_new_image(data->mlx,
-			data->width_of_win, data->height_of_win);
-	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
-			&data->mydata->bits_per_pixel, 
-			&data->mydata->line_length, &data->mydata->endian);
-	mlx_hook(data->win, 2, 0, &move_player, data);
-	mlx_hook(data->win, 17, 0, &close_win, data);
-	// mlx_hook(data->win, 2, 0, &is_pre, data);
-	// mlx_hook(data->win, 3, 0, &is_rel, data);
-	mlx_loop_hook(data->mlx, &creat_map, data);
+	main_2(data);
 	mlx_loop(data->mlx);
 }

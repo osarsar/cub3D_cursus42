@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/21 00:15:53 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/22 00:45:58 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,12 @@ void	verti_wall_cord(t_ply *data, char *view)
 		&& data->ystep < data->height_of_win
 		&& data->xstep < data->width_of_win
 		&& data->ystep < size_map_line(data->map) * NUM_PIXELS
-		&& data->xstep < max_size_col(data->map) * NUM_PIXELS )
+		&& data->xstep < max_size_col(data->map) * NUM_PIXELS)
 	{
 		x = data->ystep / NUM_PIXELS;
 		y = data->xstep / NUM_PIXELS;
-		if (data->map[x][y] && (data->map[x][y] == '1' || data->map[x][y] == '='))
+		if (data->map[x][y]
+		&& (data->map[x][y] == '1' || data->map[x][y] == '='))
 			break ;
 		data->xstep += data->v_dx;
 		data->ystep += data->v_dy;
@@ -87,11 +88,12 @@ void	hori_wall_cord(t_ply *data, char *view)
 		&& data->ystep < data->height_of_win 
 		&& data->xstep < data->width_of_win
 		&& data->ystep < size_map_line(data->map) * NUM_PIXELS
-		&& data->xstep < max_size_col(data->map) * NUM_PIXELS )
+		&& data->xstep < max_size_col(data->map) * NUM_PIXELS)
 	{
 		x = data->ystep / NUM_PIXELS;
 		y = data->xstep / NUM_PIXELS;
-		if (data->map[x][y] && (data->map[x][y] == '1' || data->map[x][y] == '='))
+		if (data->map[x][y]
+		&& (data->map[x][y] == '1' || data->map[x][y] == '='))
 			break ;
 		data->xstep += data->h_dx;
 		data->ystep += data->h_dy;

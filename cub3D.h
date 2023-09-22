@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/20 18:42:33 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:49:56 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 # define LEFT 0
 
 typedef struct s_img {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		width;
-	int		height;
-	int		endian;
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				width;
+	int				height;
+	int				endian;
 	unsigned int	*tab_color;
 }				t_img;
 
@@ -155,7 +155,7 @@ void		view_to_start(t_ply *data);
 double		init_rad(t_ply *data, double rad);
 
 //-----------------------------------------------------> tols1.c
-void		pars(t_ply	*data, int ac, char **av);
+void		check_number_2(char **list_color, int i);
 void		get_map(int fd, t_ply *data);
 void		read_config_f_c(char *line, t_ply *data);
 void		check_number(char **list_color, int check, t_ply *data);
@@ -209,11 +209,22 @@ t_img		*ft_texture(t_ply	*data, char	*path);
 int			to_rgb(int r, int g, int b);
 
 //-----------------------------------------------------> norm_1.c
-void		draw_map_3d(t_ply *data, int colomn);
-int			move_player_2(t_ply *data, int key);
 void		free_color(char **list_color, int i);
+void		draw_map_3d(t_ply *data, int colomn);
+void		move_player_2_up(t_ply *data, char *view);
+void		move_player_2_do(t_ply *data, char *view);
+int			move_player_2(t_ply *data, int key);
 
 /*-----------------------------------------------------> norm_2.c*/
 int			close_win(t_ply *data);
+void		move_player_2_a(t_ply *data, int key, char *view);
+void		move_player_2_b(t_ply *data, int x_tmp, int y_tmp);
+int			cal_str_wall(int h_win, int h_wall);
+int			cal_end_wall(int h_win, int h_wall);
+
+/*-----------------------------------------------------> norm_3.c*/
+void		main_2(t_ply *data);
+int			ft_isdigit(int c );
+void		pars(t_ply	*data, int ac, char **av);
 
 #endif

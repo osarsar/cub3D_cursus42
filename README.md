@@ -4,6 +4,10 @@
 	6 n'importe qu'elle image //
 	8 size map
 
+	1 line in map (error)
+	2 ++++map 
+	3 malloc 0 -> failed
+
 ### BONUS
 	1 Minimap : resizer
 	2 Minimap : zoom 3la lplayer

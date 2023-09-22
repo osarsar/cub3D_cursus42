@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 04:03:43 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/15 03:24:31 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/22 02:28:07 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	affiche_er(int a)
 {
 	if (a == 1)
-		write(2, "map non valide\n", 15);
+		write(2, "Error\n", 6);
 	else if (a == 2)
 		write(2, "Error\n", 6);
 	exit(1);

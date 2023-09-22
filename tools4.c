@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 05:32:46 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/20 18:51:50 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/22 02:26:18 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ void	like_bfs_algo(char **map)
 	int	i;
 	int	j;
 
-	i = -1;
-	printf("\nmap rectangle:\n");
-	while (map[++i])
-		printf("%s\n", map[i]);
 	i = 0;
 	while (map[i])
 	{
@@ -81,7 +77,5 @@ char	*read_config_path_2(char *path)
 	return_value = ft_strdup(path + 2);
 	free(path);
 	return_value = ft_strtrim_free(return_value, " \t\n");
-	// if (ft_strchr(return_value, ' ') || ft_strchr(return_value, '\t'))
-	// 	affiche_er(1);
 	return (return_value);
 }
