@@ -22,13 +22,16 @@
 		window and quit the program cleanly.
 
 
-### to fix should work when map ./cub3D z_map.cub.cub
+### to fix check N if surrounded by spaces
 
-### leaks 
 
 
 
 ### FIXED 
+
+1111111111111111111111111111111111111111111111111
+1N                                               1
+1111111111111111111111111111111111111111111111111
 
 =------------------>
 

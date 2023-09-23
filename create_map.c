@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 20:08:03 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 22:13:46 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ void	creat_map_line(t_ply *data)
 
 int	creat_map(t_ply *data)
 {
+	mlx_clear_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->mydata->img);
+	data->mydata->img = mlx_new_image(data->mlx,
+			data->width_of_win, data->height_of_win);
+	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
+			&data->mydata->bits_per_pixel, 
+			&data->mydata->line_length, &data->mydata->endian);
 	data->x = 0;
 	data->nb_y = NUM_PIXELS;
 	data->start_j = 0;

@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 12:58:38 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 23:00:49 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,10 @@ int	move_player(int key, t_ply *data)
 	return (0);
 }
 
-void	f(void)
-{
-	system("leaks cub3D");
-}
-
 int	main(int ac, char **av)
 {
 	t_ply	*data;
 
-	atexit(f);
 	data = malloc(sizeof(t_ply));
 	if (!data)
 		affiche_er(2);

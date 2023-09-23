@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:13:42 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 20:07:07 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 23:04:12 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_isdigit(int c )
 void	main_2(t_ply *data)
 {
 	data->win = mlx_new_window(data->mlx, data->width_of_win,
-			data->height_of_win, "3D_game");
+			data->height_of_win, "Temsar_3D");
 	data->mydata->img = mlx_new_image(data->mlx,
 			data->width_of_win, data->height_of_win);
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
