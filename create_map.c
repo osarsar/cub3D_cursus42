@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 00:59:00 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:07:41 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	creat_map_line(t_ply *data)
 	data->y = 0;
 	while (data->map[data->x][data->y])
 	{
-		while (i < data->nb_x)
+		while (i < data->nb_x && data->map[data->x])
 		{
 			j = data->start_j;
-			while (j < data->nb_y)
+			while (j < data->nb_y && data->map[data->x][data->y])
 			{
-				put_pixel_to_image(data, i, j);//a refaire
+				put_pixel_to_image(data, i, j);
 				j++;
 			}
 			i++;

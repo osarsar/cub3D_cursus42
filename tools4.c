@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 05:32:46 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 02:52:54 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:59:05 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	go_to_check(char **map, int i, int j)
 	if (i != 0 && map[i - 1][j] == '0')
 		affiche_er(1);
 	else if (i != (size_map_line(map) - 1) && map[i + 1][j] == '0')
-	{
-		// exit(0);
 		affiche_er(1);
-	}
 	else if (j != 0 && map[i][j - 1] == '0')
 		affiche_er(1);
 	else if (map[i][j + 1] == '0')

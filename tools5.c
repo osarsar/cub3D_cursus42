@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 07:45:07 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 02:52:50 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:07:10 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,24 @@ void	read_config_path(char *line, t_ply *data)
 		data->ea_path = ft_strtrim(line, " \t\n");
 		data->ea_path = read_config_path_2(data->ea_path);
 	}
+}
+
+void	get_map_2(int fd, char	*line, t_ply *data)
+{
+	char	*tmp_line;
+
+	tmp_line = NULL;
+	while (line != NULL)
+	{
+		if (!ft_strchr(line, '1'))
+			affiche_er(1);
+		tmp_line = ft_strjoin(tmp_line, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	tmp_line = replace_char(tmp_line, ' ', '=');
+	check_char_in_map(tmp_line);
+	data->map = ft_split(tmp_line, '\n');
+	data->map = map_to_rectangle(data->map);
+	free(tmp_line);
 }

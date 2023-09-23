@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:13:42 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 02:17:56 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:48:38 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	main_2(t_ply *data)
 void	pars(t_ply	*data, int ac, char **av)
 {
 	int	fd;
+	int	size;
 
 	if (ac != 2)
 		affiche_er(2);
@@ -43,8 +44,14 @@ void	pars(t_ply	*data, int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 		affiche_er(2);
-	if (ft_strcmp(ft_strchr(av[1], '.'), ".cub"))
+	size = ft_strlen(av[1]);
+	if (av[1][size - 4] != '.' || av[1][size - 3] != 'c'
+		|| av[1][size - 2] != 'u' || av[1][size - 1] != 'b')
+	{
+		printf("%c\n", av[1][size - 1]);
+		write(1, "L\n", 2);
 		affiche_er(2);
+	}
 	data->no_path = NULL;
 	data->so_path = NULL;
 	data->we_path = NULL;
