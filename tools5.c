@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 07:45:07 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/22 22:58:42 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 02:52:50 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	read_config_1(char *line, t_ply *data)
 {
-	if (!ft_strncmp(line, "NO ", 2) || !ft_strncmp(line, "SO ", 2)
-		|| !ft_strncmp(line, "WE ", 2) || !ft_strncmp(line, "EA ", 2))
+	if (!ft_strncmp(line, "NO ", 3) || !ft_strncmp(line, "SO ", 3)
+		|| !ft_strncmp(line, "WE ", 3) || !ft_strncmp(line, "EA ", 3))
 		read_config_path(line, data);
 	else if (!ft_strncmp(line, "C ", 2) || !ft_strncmp(line, "F ", 2))
 		read_config_f_c(line, data);
 	else
 	{
 		free(line);
-		affiche_er(1);
+		affiche_er(2);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 05:09:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/22 22:54:21 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 02:57:32 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,16 @@ void	get_map(int fd, t_ply *data)
 	{
 		free(line);
 		line = get_next_line(fd);
-		line = ft_strtrim_free(line, " \t");
+		if (!ft_strchr(line, '1'))
+			line = ft_strtrim_free(line, " \t");
 	}
 	while (line != NULL)
 	{
 		tmp_line = ft_strjoin(tmp_line, line);
 		free(line);
 		line = get_next_line(fd);
+		// if (!ft_strchr(line, '1'))
+		// 	affiche_er(1);
 	}
 	tmp_line = replace_char(tmp_line, ' ', '=');
 	check_char_in_map(tmp_line);

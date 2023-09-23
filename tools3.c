@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 04:03:43 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/22 02:28:07 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 01:50:26 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 void	affiche_er(int a)
 {
-	if (a == 1)
-		write(2, "Error\n", 6);
-	else if (a == 2)
+	if (a == 1 || a == 2)
 		write(2, "Error\n", 6);
 	exit(1);
 }
@@ -26,6 +24,10 @@ char	*replace_char(char *tmp_line, char old, char new)
 	int	i;
 
 	i = 0;
+	if (!tmp_line)
+	{
+		affiche_er(1);
+	}
 	while (tmp_line[i])
 	{
 		if (tmp_line[i] == old)

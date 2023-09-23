@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/21 00:09:20 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 00:59:00 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	creat_map_line(t_ply *data)
 			j = data->start_j;
 			while (j < data->nb_y)
 			{
-				put_pixel_to_image(data, i, j);
+				put_pixel_to_image(data, i, j);//a refaire
 				j++;
 			}
 			i++;

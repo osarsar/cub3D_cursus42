@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 05:32:46 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/22 02:26:18 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 02:52:54 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	go_to_check(char **map, int i, int j)
 	if (i != 0 && map[i - 1][j] == '0')
 		affiche_er(1);
 	else if (i != (size_map_line(map) - 1) && map[i + 1][j] == '0')
-		affiche_er(2);
+	{
+		// exit(0);
+		affiche_er(1);
+	}
 	else if (j != 0 && map[i][j - 1] == '0')
 		affiche_er(1);
 	else if (map[i][j + 1] == '0')
@@ -77,5 +80,10 @@ char	*read_config_path_2(char *path)
 	return_value = ft_strdup(path + 2);
 	free(path);
 	return_value = ft_strtrim_free(return_value, " \t\n");
+	if (!ft_strcmp(return_value, ""))
+	{
+		free(return_value);
+		affiche_er(1);
+	}
 	return (return_value);
 }
