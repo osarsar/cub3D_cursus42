@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:13:42 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 13:48:42 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:48:38 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,6 @@ void	main_2(t_ply *data)
 	mlx_loop_hook(data->mlx, &creat_map, data);
 }
 
-void	pars_2(t_ply	*data)
-{
-	data->no_path = NULL;
-	data->so_path = NULL;
-	data->we_path = NULL;
-	data->ea_path = NULL;
-	data->f_1 = 0;
-	data->f_2 = 0;
-	data->f_3 = 0;
-	data->c_1 = 0;
-	data->c_2 = 0;
-	data->c_3 = 0;
-}
-
 void	pars(t_ply	*data, int ac, char **av)
 {
 	int	fd;
@@ -66,7 +52,16 @@ void	pars(t_ply	*data, int ac, char **av)
 		write(1, "L\n", 2);
 		affiche_er(2);
 	}
-	pars_2(data);
+	data->no_path = NULL;
+	data->so_path = NULL;
+	data->we_path = NULL;
+	data->ea_path = NULL;
+	data->f_1 = 0;
+	data->f_2 = 0;
+	data->f_3 = 0;
+	data->c_1 = 0;
+	data->c_2 = 0;
+	data->c_3 = 0;
 	get_map(fd, data);
 	check_map_close(data->map);
 	close(fd);

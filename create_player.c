@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/22 23:14:32 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:37:37 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	get_ofset_colomn(t_ply *data)
 	return (x);
 }
 
-// draw_view(data);
 void	fov_player(t_ply *data)
 {
 	char	*view;
@@ -88,6 +87,7 @@ void	fov_player(t_ply *data)
 	rad = init_rad(data, rad);
 	while (colomn <= data->width_of_win)
 	{
+		// draw_view(data);
 		init_angle_2pi(data);
 		view = check_view(data);
 		first_hori_verti(data);
@@ -96,6 +96,7 @@ void	fov_player(t_ply *data)
 		hori_wall_cord(data, view);
 		verti_wall_cord(data, view);
 		take_distance(data);
+		// push_rays(data);
 		data->fov += rad / data->width_of_win;
 		draw_map_3d(data, colomn);
 		colomn++;

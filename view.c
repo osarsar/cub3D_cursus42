@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 08:42:48 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/18 21:40:01 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 19:05:36 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ double	init_rad(t_ply *data, double rad)
 	data->face_rad = deg_to_rad(data->face_angle);
 	init_angle(data);
 	rad = deg_to_rad(data->angle);
-	data->rad = data->face_rad - (rad / 2);
-	data->fov = data->rad;
+	data->fov = data->face_rad - (rad / 2);
 	return (rad);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 22:44:41 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/22 00:45:58 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:33:58 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	verti_wall_cord(t_ply *data, char *view)
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "down_right"))
 		data->xstep--;
 	while (data->xstep > 0 && data->ystep > 0
-		&& data->ystep < data->height_of_win
-		&& data->xstep < data->width_of_win
+		// && data->ystep < data->height_of_win
+		// && data->xstep < data->width_of_win
 		&& data->ystep < size_map_line(data->map) * NUM_PIXELS
 		&& data->xstep < max_size_col(data->map) * NUM_PIXELS)
 	{
@@ -85,8 +85,8 @@ void	hori_wall_cord(t_ply *data, char *view)
 	if (!ft_strcmp(view, "up_left") || !ft_strcmp(view, "up_right"))
 		data->ystep--;
 	while (data->xstep > 0 && data->ystep > 0
-		&& data->ystep < data->height_of_win 
-		&& data->xstep < data->width_of_win
+		// && data->ystep < data->height_of_win 
+		// && data->xstep < data->width_of_win
 		&& data->ystep < size_map_line(data->map) * NUM_PIXELS
 		&& data->xstep < max_size_col(data->map) * NUM_PIXELS)
 	{
