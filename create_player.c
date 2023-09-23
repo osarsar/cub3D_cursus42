@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 19:37:37 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 20:07:44 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	fov_player(t_ply *data)
 	rad = init_rad(data, rad);
 	while (colomn <= data->width_of_win)
 	{
-		// draw_view(data);
 		init_angle_2pi(data);
 		view = check_view(data);
 		first_hori_verti(data);
@@ -96,7 +95,6 @@ void	fov_player(t_ply *data)
 		hori_wall_cord(data, view);
 		verti_wall_cord(data, view);
 		take_distance(data);
-		// push_rays(data);
 		data->fov += rad / data->width_of_win;
 		draw_map_3d(data, colomn);
 		colomn++;

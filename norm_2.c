@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:29:54 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 19:30:40 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 20:07:26 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	move_player_2_b(t_ply *data, int x_tmp, int y_tmp)
 		data->p_y = y_tmp;
 	}
 	if ((x < 0 || y < 0
-			|| x >= ((data->width_of_win / NUM_PIXELS) - 1)
-			|| y >= ((data->height_of_win / NUM_PIXELS) - 1)
 			|| data->map[y][x] == '1')
 			|| (data->map[y][(int)(x_tmp / NUM_PIXELS)] == '1'
 		&& data->map[(int)(y_tmp / NUM_PIXELS)][x] == '1'))

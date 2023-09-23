@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 23:31:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 19:30:44 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 19:57:11 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,6 @@ int	move_player_2(t_ply *data, int key)
 	y_tmp = data->p_y;
 	view = check_view_player(data);
 	move_player_2_a(data, key, view);
-	//move_player_2_b(data, x_tmp, y_tmp);
+	move_player_2_b(data, x_tmp, y_tmp);
 	return (0);
 }

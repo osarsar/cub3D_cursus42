@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 19:37:52 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/23 20:08:03 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 void	put_pixel_to_image(t_ply *data, int i, int j)
 {
-	// if (data->map[data->x][data->y] == '1'
-	// 	|| data->map[data->x][data->y] == '=')
-	// 	my_mlx_pixel_put(data->mydata, i, j, 0x808080);
-	// else if (data->map[data->x][data->y] == '0')
-	// 	my_mlx_pixel_put(data->mydata, i, j, 0x00FFFFFF);
-	// else 
 	if (data->map[data->x][data->y] == 'N'
 		|| data->map[data->x][data->y] == 'S'
 		|| data->map[data->x][data->y] == 'W'
@@ -82,7 +76,6 @@ int	creat_map(t_ply *data)
 		data->start_j += NUM_PIXELS;
 		data->x++;
 	}
-	put_player(data);
 	fov_player(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->mydata->img, 0, 0);
 	return (0);
