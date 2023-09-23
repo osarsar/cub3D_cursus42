@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/22 22:49:56 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/23 13:46:59 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ char		*read_config_path_2(char *path);
 void		read_config_1(char *line, t_ply *data);
 char		*read_config(int fd, t_ply *data);
 void		read_config_path(char *line, t_ply *data);
+void		get_map_2(int fd, char	*line, t_ply *data);
 
 //-----------------------------------------------------> libft1.c
 char		*ft_strtrim(char *s1, char *set);
