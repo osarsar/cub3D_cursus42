@@ -1,0 +1,9 @@
+leak dyal imad
+
+C 234, 198, 150
+C 101, 69, 0
+
+segf
+
+printf(), write
+3lem hamza, imad, mehdi

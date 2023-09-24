@@ -1,9 +1,10 @@
 NO ./images/1.xpm
-C  234, 198, 150
+EA ./images/4.xpm
 SO ./images/2.xpm
-WE    ./images/3.xpm
-EA      ./images/4.xpm
-F 101, 69, 0
+WE ./images/3.xpm
+
+C 234, 198, 150
+C 101, 69, 0
 
 1111111111111
 1000000000001
