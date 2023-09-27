@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:13:42 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 23:04:12 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/27 23:34:42 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,7 @@ void	pars(t_ply	*data, int ac, char **av)
 	size = ft_strlen(av[1]);
 	if (av[1][size - 4] != '.' || av[1][size - 3] != 'c'
 		|| av[1][size - 2] != 'u' || av[1][size - 1] != 'b')
-	{
-		printf("%c\n", av[1][size - 1]);
-		write(1, "L\n", 2);
 		affiche_er(2);
-	}
 	pars_2(data);
 	get_map(fd, data);
 	check_map_close(data->map);

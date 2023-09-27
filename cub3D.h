@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/24 13:00:54 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/27 23:33:53 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_ply
 	int				c_1;
 	int				c_2;
 	int				c_3;
+	int				f;
+	int				c;
 	double			first_hx;
 	double			first_hy;
 	double			first_vx;

@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 23:00:49 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/27 23:51:52 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,12 @@ int	move_player(int key, t_ply *data)
 		data->face_angle -= 5;
 	return (0);
 }
+
+// void f()
+// {
+// 	system("leaks cub3D");
+// }
+// atexit(f);
 
 int	main(int ac, char **av)
 {

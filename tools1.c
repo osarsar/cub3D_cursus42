@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 05:09:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 13:07:08 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/27 23:41:10 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,14 @@ void	check_number(char **list_color, int check, t_ply *data)
 		data->f_1 = ft_atoi(list_color[0]);
 		data->f_2 = ft_atoi(list_color[1]);
 		data->f_3 = ft_atoi(list_color[2]);
+		data->f = data->f + 1;
 	}
 	else if (check == 2)
 	{
 		data->c_1 = ft_atoi(list_color[0]);
 		data->c_2 = ft_atoi(list_color[1]);
 		data->c_3 = ft_atoi(list_color[2]);
+		data->c = data->c + 1;
 	}
 	free_color(list_color, i);
 }
@@ -100,6 +102,8 @@ void	get_map(int fd, t_ply *data)
 
 	line = read_config(fd, data);
 	if (!data->no_path || !data->so_path || !data->we_path || !data->ea_path)
+		affiche_er(1);
+	if (data->f != 1 || data->c != 1)
 		affiche_er(1);
 	line = ft_strtrim_free(line, " \t");
 	while (!ft_strcmp(line, "\n"))

@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 07:45:07 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 13:07:10 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/27 23:51:08 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,22 @@ char	*read_config(int fd, t_ply *data)
 
 void	read_config_path(char *line, t_ply *data)
 {
-	if (!ft_strncmp(line, "NO ", 2))
+	if (!ft_strncmp(line, "NO ", 2) && data->no_path == NULL)
 	{
 		data->no_path = ft_strtrim(line, " \t\n");
 		data->no_path = read_config_path_2(data->no_path);
 	}
-	else if (!ft_strncmp(line, "SO ", 2))
+	else if (!ft_strncmp(line, "SO ", 2) && data->so_path == NULL)
 	{
 		data->so_path = ft_strtrim(line, " \t\n");
 		data->so_path = read_config_path_2(data->so_path);
 	}
-	else if (!ft_strncmp(line, "WE ", 2))
+	else if (!ft_strncmp(line, "WE ", 2) && data->we_path == NULL)
 	{
 		data->we_path = ft_strtrim(line, " \t\n");
 		data->we_path = read_config_path_2(data->we_path);
 	}
-	else if (!ft_strncmp(line, "EA ", 2))
+	else if (!ft_strncmp(line, "EA ", 2) && data->ea_path == NULL)
 	{
 		data->ea_path = ft_strtrim(line, " \t\n");
 		data->ea_path = read_config_path_2(data->ea_path);
