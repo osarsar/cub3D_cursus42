@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/28 14:41:52 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:03:47 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ typedef struct s_ply
 	double			x_wall;
 	double			y_wall;
 	int				check_h_v;
+	int				k_up;
+	int				k_down;
+	int				k_left;
+	int				k_right;
+	int				tr_right;
+	int				tr_left;
 	t_data			*mydata;
 	t_img			*img;
 	t_img			*img_n;
@@ -120,7 +126,7 @@ typedef struct s_ply
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		put_pixel_to_image(t_ply *data, int i, int j);
 void		creat_map_line(t_ply *data);
-int			creat_map(t_ply *data);
+int			creat_map(t_ply *data, int key);
 
 /*-----------------------------------------------------> create_player.c*/
 void		first_hori_verti(t_ply *data);
@@ -183,6 +189,9 @@ void		like_bfs_algo(char **map);
 void		check_map_close(char **map);
 char		*read_config_path_2(char *path);
 
+/*-----------------------------------------------------> speed.c*/
+int			set(int keycode, t_ply *data);
+int			reset(int keycode, t_ply *data);
 /*-----------------------------------------------------> tols5.c*/
 void		read_config_1(char *line, t_ply *data);
 char		*read_config(int fd, t_ply *data);

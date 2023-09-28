@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/28 14:44:41 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/28 15:59:21 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,18 @@ int	move_player(int key, t_ply *data)
 {
 	if (key == 53)
 		exit(1);
-	else if (key == RIGHT)
+	else if (data->k_right == 1)
 		move_player_2(data, key);
-	else if (key == LEFT)
+	else if (data->k_left == 1)
 		move_player_2(data, key);
-	else if (key == DOWN)
+	else if (data->k_down == 1)
 		move_player_2(data, key);
-	else if (key == UP)
+	else if (data->k_up == 1)
 		move_player_2(data, key);
-	else if (key == 124)
-		data->face_angle += 5;
-	else if (key == 123)
-		data->face_angle -= 5;
+	else if (data->tr_right)
+		data->face_angle += 3;
+	else if (data->tr_left)
+		data->face_angle -= 3;
 	return (0);
 }
 

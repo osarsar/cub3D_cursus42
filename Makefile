@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+         #
+#    By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/18 05:17:54 by stemsama          #+#    #+#              #
-#    Updated: 2023/09/24 15:52:37 by stemsama         ###   ########.fr        #
+#    Updated: 2023/09/28 16:02:44 by osarsar          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC = main.c get_next_line.c get_next_line_utils.c \
 		libft1.c libft2.c libft3.c \
 		tools1.c tools2.c tools3.c tools4.c tools5.c\
 		create_map.c create_player.c player_view.c	view.c raycast.c\
-		textures.c \
+		textures.c speed.c\
 		norm_1.c norm_2.c norm_3.c \
 
 OBJECT = $(SRC:.c=.o)

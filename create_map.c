@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:11:49 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/28 14:40:42 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/28 15:41:10 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void	creat_map_line(t_ply *data)
 	}
 }
 
-int	creat_map(t_ply *data)
+int	creat_map(t_ply *data, int key)
 {
+	move_player(key, data);
 	mlx_clear_window(data->mlx, data->win);
 	mlx_destroy_image(data->mlx, data->mydata->img);
 	data->mydata->img = mlx_new_image(data->mlx,

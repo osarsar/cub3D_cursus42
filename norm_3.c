@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 02:13:42 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/27 23:34:42 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/28 16:04:24 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ int	ft_isdigit(int c )
 void	main_2(t_ply *data)
 {
 	data->win = mlx_new_window(data->mlx, data->width_of_win,
-			data->height_of_win, "Temsar_3D");
+			data->height_of_win, "TEMSAR_3D");
 	data->mydata->img = mlx_new_image(data->mlx,
 			data->width_of_win, data->height_of_win);
 	data->mydata->addr = mlx_get_data_addr(data->mydata->img, 
 			&data->mydata->bits_per_pixel, 
 			&data->mydata->line_length, &data->mydata->endian);
-	mlx_hook(data->win, 2, 0, &move_player, data);
+	mlx_hook(data->win, 02, 0, set, data);
+	mlx_hook(data->win, 03, 0, reset, data);
 	mlx_hook(data->win, 17, 0, &close_win, data);
 	mlx_loop_hook(data->mlx, &creat_map, data);
 }

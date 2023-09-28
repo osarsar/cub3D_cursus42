@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:29:54 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/23 20:07:26 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/28 15:58:24 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ int	close_win(t_ply *data)
 
 void	move_player_2_a(t_ply *data, int key, char *view)
 {
-	if (key == UP)
+	(void)key;
+	if (data->k_up == 1)
 		move_player_2_up(data, view);
-	else if (key == DOWN)
+	else if (data->k_down == 1)
 		move_player_2_do(data, view);
-	else if (key == RIGHT)
+	else if (data->k_right == 1)
 	{
 		data->p_x -= cos(data->face_rad + (M_PI * 0.5)) * data->speed;
 		data->p_y -= sin(data->face_rad + (M_PI * 0.5)) * data->speed;
 	}
-	else if (key == LEFT)
+	else if (data->k_left == 1)
 	{
 		data->p_x += cos(data->face_rad + (M_PI * 0.5)) * data->speed;
 		data->p_y += sin(data->face_rad + (M_PI * 0.5)) * data->speed;
