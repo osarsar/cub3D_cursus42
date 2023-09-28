@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/28 15:59:21 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/28 16:38:45 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_data(t_ply *data, int ac, char **av)
 	data->p_y = 0;
 	data->nb_x = NUM_PIXELS;
 	data->nb_y = NUM_PIXELS;
-	data->speed = 10;
+	data->speed = 7;
 	data->map = NULL;
 	data->start_j = 0;
 	data->radius = 7;
