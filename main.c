@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:41:40 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/27 23:51:52 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:44:41 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,6 @@ double	deg_to_rad(double deg)
 	return (deg * (M_PI / 180));
 }
 
-void	push_rays(t_ply *data)
-{
-	int	i;
-	int	ox;
-	int	oy;
-
-	i = 0;
-	while (i <= data->len_ray)
-	{
-		ox = data->p_x - (i * cos(data->fov));
-		oy = data->p_y - (i * sin(data->fov));
-		my_mlx_pixel_put(data->mydata, ox, oy, 0x00FF0000);
-		i++;
-	}
-}
-
 int	move_player(int key, t_ply *data)
 {
 	if (key == 53)
@@ -74,12 +58,6 @@ int	move_player(int key, t_ply *data)
 		data->face_angle -= 5;
 	return (0);
 }
-
-// void f()
-// {
-// 	system("leaks cub3D");
-// }
-// atexit(f);
 
 int	main(int ac, char **av)
 {

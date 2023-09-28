@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/27 23:33:53 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:41:52 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ void		creat_map_line(t_ply *data);
 int			creat_map(t_ply *data);
 
 /*-----------------------------------------------------> create_player.c*/
-void		put_player(t_ply *data);
 void		first_hori_verti(t_ply *data);
 void		padding(t_ply *data);
 int			get_ofset_colomn(t_ply *data);

@@ -6,33 +6,11 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 20:07:44 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:41:08 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	put_player(t_ply *data)
-{
-	data->start_x = data->p_x - data->radius;
-	data->end_x = data->p_x + data->radius;
-	data->start_y = data->p_y - data->radius;
-	data->end_y = data->p_y + data->radius;
-	data->x = data->start_x;
-	while (data->x <= data->end_x)
-	{
-		data->y = data->start_y;
-		while (data->y <= data->end_y)
-		{
-			if (((data->x - data->p_x) * (data->x - data->p_x))
-				+ ((data->y - data->p_y) * (data->y - data->p_y))
-				<= (data->radius * data->radius))
-				my_mlx_pixel_put(data->mydata, data->x, data->y, 0x00FF0000);
-			data->y++;
-		}
-		data->x++;
-	}
-}
 
 void	first_hori_verti(t_ply *data)
 {

@@ -6,7 +6,7 @@
 /*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 08:42:48 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/23 19:05:36 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/28 14:43:16 by osarsar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,6 @@ void	init_angle_2pi(t_ply *data)
 	data->fov = fmod(data->fov, (2 * M_PI));
 	if (data->fov < 0)
 		data->fov = (2 * M_PI) + data->fov;
-}
-
-void	draw_view(t_ply *data)
-{
-	int	j;
-	int	ox;
-	int	oy;
-
-	j = 0;
-	while (j <= 50)
-	{
-		ox = data->p_x - (j * cos(data->face_rad));
-		oy = data->p_y - (j * sin(data->face_rad));
-		my_mlx_pixel_put(data->mydata, ox, oy, 0x0000FF);
-		j++;
-	}
 }
 
 void	view_to_start(t_ply *data)
