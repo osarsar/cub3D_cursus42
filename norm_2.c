@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   norm_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 15:29:54 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/28 15:58:24 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/29 15:43:39 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,3 @@ int	cal_end_wall(int h_win, int h_wall)
 		end_of_wall = h_win;
 	return (end_of_wall);
 }
-
-// void is_pre()
-// {}
-
-// void is_rel()
-// {}

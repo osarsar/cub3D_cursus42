@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:44:17 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/28 16:03:47 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/29 18:51:39 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ typedef struct s_ply
 	void			*win;
 	int				x;
 	int				y;
-	int				p_x;
-	int				p_y;
+	double			p_x;
+	double			p_y;
 	int				start_x;
 	int				start_y;
 	int				start_j;

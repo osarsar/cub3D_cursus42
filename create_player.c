@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/28 14:41:08 by osarsar          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:01:16 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	first_hori_verti(t_ply *data)
 {
-	data->first_hy = (data->p_y / NUM_PIXELS) * NUM_PIXELS;
-	data->first_hx = (data->first_hy - data->p_y / tan(data->fov));
-	data->first_vx = (data->p_x / NUM_PIXELS) * NUM_PIXELS;
+	data->first_hy = floor(data->p_y / NUM_PIXELS) * NUM_PIXELS;
+	data->first_hx = ((data->first_hy - data->p_y / tan(data->fov)));
+	data->first_vx = floor(data->p_x / NUM_PIXELS) * NUM_PIXELS;
 	data->first_vy = ((data->first_vx - data->p_x) * tan(data->fov));
 }
 

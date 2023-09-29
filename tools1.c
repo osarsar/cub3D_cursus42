@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 05:09:13 by stemsama          #+#    #+#             */
-/*   Updated: 2023/09/27 23:41:10 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/09/29 15:45:49 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	read_config_f_c(char *line, t_ply *data)
 	line = NULL;
 }
 
-//line = read_config(fd, data); ->| now line = first line of map
 void	get_map(int fd, t_ply *data)
 {
 	char	*line;
@@ -105,7 +104,8 @@ void	get_map(int fd, t_ply *data)
 		affiche_er(1);
 	if (data->f != 1 || data->c != 1)
 		affiche_er(1);
-	line = ft_strtrim_free(line, " \t");
+	if (!ft_strchr(line, '1'))
+		line = ft_strtrim_free(line, " \t");
 	while (!ft_strcmp(line, "\n"))
 	{
 		free(line);

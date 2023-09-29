@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: osarsar <osarsar@student.42.fr>            +#+  +:+       +#+         #
+#    By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/18 05:17:54 by stemsama          #+#    #+#              #
-#    Updated: 2023/09/28 16:02:44 by osarsar          ###   ########.fr        #
+#    Updated: 2023/09/29 15:42:31 by stemsama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = cub3D
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -Ofast #-fsanitize=address
+FLAGS = -Wall -Werror -Wextra -Ofast
 VAR	  = -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c get_next_line.c get_next_line_utils.c \
