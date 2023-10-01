@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 08:42:48 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/29 18:42:39 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:30:43 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	init_angle_2pi(t_ply *data)
 void	view_to_start(t_ply *data)
 {
 	if (data->map[data->x][data->y] == 'N')
-		data->face_angle = 270; 
-	else if (data->map[data->x][data->y] == 'S')
 		data->face_angle = 90;
+	else if (data->map[data->x][data->y] == 'S')
+		data->face_angle = 270; 
 	else if (data->map[data->x][data->y] == 'W')
-		data->face_angle = 180; 
-	else if (data->map[data->x][data->y] == 'E')
 		data->face_angle = 0; 
+	else if (data->map[data->x][data->y] == 'E')
+		data->face_angle = 180; 
 }
 
 double	init_rad(t_ply *data, double rad)

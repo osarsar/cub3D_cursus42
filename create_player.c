@@ -6,7 +6,7 @@
 /*   By: stemsama <stemsama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 08:15:37 by osarsar           #+#    #+#             */
-/*   Updated: 2023/09/29 19:01:16 by stemsama         ###   ########.fr       */
+/*   Updated: 2023/10/01 17:54:01 by stemsama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	get_ofset_colomn(t_ply *data)
 		x = fmod(data->y_wall, NUM_PIXELS);
 	if (data->check_h_v == 1
 		&& (!ft_strcmp(view, "down_right") || !ft_strcmp(view, "up_left")))
-		data->img = data->img_s;
+		data->img = data->img_w;
 	else if (data->check_h_v == 1)
-		data->img = data->img_n;
+		data->img = data->img_e;
 	else if (data->check_h_v == 0
 		&& (!ft_strcmp(view, "up_right") || !ft_strcmp(view, "up_left")))
-		data->img = data->img_w;
+		data->img = data->img_n;
 	else
-		data->img = data->img_e;
+		data->img = data->img_s;
 	return (x);
 }
 
